@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="Estructura de Datos" Database="">
+  <Project Name="Hanoi" Path="Hanoi/Hanoi.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Project Name="Hanoi" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Project Name="Hanoi" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>
