@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="Estructura de Datos" Database="">
-  <Project Name="Hanoi" Path="Hanoi/Hanoi.project" Active="Yes"/>
+  <Project Name="Hanoi" Path="Hanoi/Hanoi.project" Active="No"/>
+  <Project Name="RecursiveGreatestCommonDivisor" Path="RecursiveGreatestCommonDivisor/RecursiveGreatestCommonDivisor.project" Active="No"/>
+  <Project Name="RecursiveVectorComponentAdder" Path="RecursiveVectorComponentAdder/RecursiveVectorComponentAdder.project" Active="No"/>
+  <Project Name="RecursiveMatrixComponentAdder" Path="RecursiveMatrixComponentAdder/RecursiveMatrixComponentAdder.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Project Name="Hanoi" ConfigName="Debug"/>
+      <Project Name="RecursiveGreatestCommonDivisor" ConfigName="Debug"/>
+      <Project Name="RecursiveVectorComponentAdder" ConfigName="Debug"/>
+      <Project Name="RecursiveMatrixComponentAdder" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Project Name="Hanoi" ConfigName="Release"/>
+      <Project Name="RecursiveGreatestCommonDivisor" ConfigName="Release"/>
+      <Project Name="RecursiveVectorComponentAdder" ConfigName="Release"/>
+      <Project Name="RecursiveMatrixComponentAdder" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
