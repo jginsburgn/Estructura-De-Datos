@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Jonathan Ginsburg. All rights reserved.
 //
 
+
+
 #include <iostream>
 #include "Helper.h"
 
@@ -156,8 +158,14 @@ void moveInLaberynth(char** laberynth, int rows, int columns, int currentRow, in
             moveInLaberynth(laberynth, rows, columns, currentRow + movementInX(currentDirection), currentColumn + movementInY(currentDirection), currentDirection);
         }
         else{
+            int times = 0;
             while (!movementAvailable(laberynth, rows, columns, currentRow + movementInX(currentDirection), currentColumn + movementInY(currentDirection))) {
                 currentDirection = leftOf(currentDirection);
+                ++times;
+                if (times > 4) {
+                    Helper::print("Unsolvable laberynth.");
+                    return;
+                }
             }
             Helper::print("Move from row:" + std::to_string(currentColumn + 1) + ", column:" + std::to_string(currentRow + 1) + " to row:" + std::to_string(currentColumn + movementInY(currentDirection) + 1) + ", column:" + std::to_string(currentRow + movementInX(currentDirection) + 1) + ".");
             moveInLaberynth(laberynth, rows, columns, currentRow + movementInX(currentDirection), currentColumn + movementInY(currentDirection), currentDirection);
