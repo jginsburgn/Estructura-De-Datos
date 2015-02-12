@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Jonathan Ginsburg. All rights reserved.
 //
 
-
-
 #include <iostream>
 #include "Helper.h"
 
