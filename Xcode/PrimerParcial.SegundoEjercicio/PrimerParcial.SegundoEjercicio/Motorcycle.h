@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "Vehicle.h"
 
-class Motorcycle : Vehicle{
+class Motorcycle : public Vehicle{
 protected:
     int cylinderCapacity;
 public:

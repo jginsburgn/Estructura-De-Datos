@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "Vehicle.h"
 
-class Van : Vehicle{
+class Van : public Vehicle{
 protected:
     std::string traction;
 public:

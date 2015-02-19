@@ -21,15 +21,6 @@ Sale* sales = new Sale[100];
 int lastCustomer = 0;
 int lastSale = 0;
 
-bool customerExists(Customer customer){
-    for (int i = 0; i < lastCustomer; ++i) {
-        if (customers[i].getIdNumber() == customer.getIdNumber()) {
-            return true;
-        }
-    }
-    return false;
-}
-
 void showAllCustomers(){
     Helper::print("Showing all customers:");
     for (int i = 0; i < lastCustomer; ++i) {
@@ -41,23 +32,59 @@ void showAllCustomers(){
 
 Customer chooseCustomer(){
     showAllCustomers();
-    return customers[Helper::read<int>("Which customer is buying?") - 1];
+    return customers[Helper::read<int>("Which customer is buying? (enter the number of the customer)") - 1];
+}
+
+void addNewCarSale(){
+    Car* car = new Car(Helper::read<int>("What is the code of the car?"), Helper::read<std::string>("What is the brand of the car?"), Helper::read<int>("What is the model of the car?"), Helper::read<int>("What is the mileage of the car?"));
+    Sale sale = Sale(Helper::read<int>("What is the price of the car?"), car, chooseCustomer());
+    sales[lastSale] = sale;
+}
+
+void addNewVanSale() {
+    Van* van = new Van(Helper::read<int>("What is the code of the van?"), Helper::read<std::string>("What is the brand of the van?"), Helper::read<int>("What is the model of the van?"), Helper::read<int>("What is the mileage of the van?"), Helper::read<std::string>("What is the traction of the van?"));
+    Sale sale = Sale(0, van, chooseCustomer());
+    sales[lastSale] = sale;
+}
+
+void addNewMotorcycleSale(){
+    Motorcycle* motorcycle = new Motorcycle(Helper::read<int>("What is the code of the motorcycle?"), Helper::read<std::string>("What is the brand of the motorcycle?"), Helper::read<int>("What is the model of the motorcycle?"), Helper::read<int>("What is the mileage of the motorcycle?"), Helper::read<int>("What is the cylinder capacity of the motorcycle?"));
+    Sale sale = Sale(0, motorcycle, chooseCustomer());
+    sales[lastSale] = sale;
+}
+
+bool customerExists(Customer customer){
+    for (int i = 0; i < lastCustomer; ++i) {
+        if (customers[i].getIdNumber() == customer.getIdNumber()) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void addNewSale(){
     Helper::print("Adding New Sale:");
-    
-    Sale sale;
     
     std::string options[3];
     options[0] = "1 for car.";
     options[1] = "2 for van.";
     options[2] = "3 for motorcycle.";
 
-            Car* car = new Car(0, "", 0, 0);
-            sale = Sale(0, car, chooseCustomer());
-
-
+    switch (Helper::menu("adding new sale", options, 3)) {
+        case 1:
+            addNewCarSale();
+            break;
+        case 2:
+            addNewVanSale();
+            break;
+        case 3:
+            addNewMotorcycleSale();
+            break;
+        default:
+            Helper::print("Option is not valid");
+            break;
+    }
+    
     Helper::print("Operation finished");
 }
 
