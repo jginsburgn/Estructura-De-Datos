@@ -16,3 +16,19 @@ Sale::Sale(){
 
 Sale::Sale(int newPrice, Vehicle* newVehicle, Customer newBuyer) : vehicle(newVehicle), price(newPrice), buyer(newBuyer){
 }
+
+void Sale::print(){
+    Helper::print("Sale of " + vehicle->details() + " to " + buyer.details() + "; for " + Helper::intToString(price) + " dollars.");
+}
+
+bool Sale::operator<(Sale &sale){
+    return this->price < sale.price;
+}
+
+bool Sale::operator==(Sale &sale){
+    return this->price == sale.price;
+}
+
+Customer Sale::getCustomer(){
+    return buyer;
+}

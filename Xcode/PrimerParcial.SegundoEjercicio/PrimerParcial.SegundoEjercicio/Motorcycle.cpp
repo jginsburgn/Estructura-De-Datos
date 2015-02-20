@@ -10,3 +10,7 @@
 
 Motorcycle::Motorcycle(int newCode, std::string newBrand, int newModel, int newMileage, int newCylinderCapacity) : Vehicle(newCode, newBrand, newModel, newMileage), cylinderCapacity(newCylinderCapacity){
 }
+
+std::string Motorcycle::details(){
+    return "motorcycle of " + brand + " from " + Helper::intToString(model) + " with code " + Helper::intToString(code) + " with mileage " + Helper::intToString(mileage) + " with cylinder capacity " + Helper::intToString(cylinderCapacity);
+}

@@ -22,6 +22,10 @@ private:
 public:
     Sale();
     Sale(int newPrice, Vehicle* newVehicle, Customer newBuyer);
+    void print();
+    bool operator<(Sale & sale);
+    bool operator==(Sale & sale);
+    Customer getCustomer();
 };
 
 #endif /* defined(__PrimerParcial_SegundoEjercicio__Sale__) */

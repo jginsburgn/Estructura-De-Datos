@@ -18,9 +18,17 @@ Customer::Customer(std::string newFirstName, std::string newLastName, int newIdN
 }
 
 void Customer::print(){
-    Helper::print("Name: " + firstName + ", Last Name: " + lastName + "ID: " + Helper::intToString(idNumber) + ".");
+    Helper::print("Name: " + firstName + ", Last Name: " + lastName + " ID: " + Helper::intToString(idNumber) + ".");
 }
 
 int Customer::getIdNumber(){
     return idNumber;
+}
+
+std::string Customer::details(){
+    return firstName + " " + lastName + ", with ID number: " + Helper::intToString(idNumber);
+}
+
+bool Customer::operator==(Customer &customer){
+    return this->firstName == customer.firstName && this->lastName == customer.lastName && this->idNumber == customer.idNumber;
 }

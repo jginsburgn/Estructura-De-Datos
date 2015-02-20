@@ -23,6 +23,8 @@ public:
     Customer(std::string newFirstName, std::string newLastName, int newIdNumber);
     void print();
     int getIdNumber();
+    std::string details();
+    bool operator==(Customer & customer);
 };
 
 #endif /* defined(__PrimerParcial_SegundoEjercicio__Customer__) */

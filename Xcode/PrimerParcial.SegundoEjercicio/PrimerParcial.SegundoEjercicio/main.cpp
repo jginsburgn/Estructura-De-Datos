@@ -14,6 +14,7 @@
 #include "Motorcycle.h"
 #include "Sale.h"
 #include "Customer.h"
+#include "GenericSort.h"
 #define menuOptions 5
 
 Customer* customers = new Customer[100];
@@ -24,7 +25,7 @@ int lastSale = 0;
 void showAllCustomers(){
     Helper::print("Showing all customers:");
     for (int i = 0; i < lastCustomer; ++i) {
-        Helper::print("Customer number " + Helper::intToString(i + 1));
+        Helper::print("Customer number " + Helper::intToString(i + 1) + ":");
         customers[i].print();
     }
     Helper::print("Operation finished.");
@@ -38,19 +39,19 @@ Customer chooseCustomer(){
 void addNewCarSale(){
     Car* car = new Car(Helper::read<int>("What is the code of the car?"), Helper::read<std::string>("What is the brand of the car?"), Helper::read<int>("What is the model of the car?"), Helper::read<int>("What is the mileage of the car?"));
     Sale sale = Sale(Helper::read<int>("What is the price of the car?"), car, chooseCustomer());
-    sales[lastSale] = sale;
+    sales[lastSale++] = sale;
 }
 
 void addNewVanSale() {
     Van* van = new Van(Helper::read<int>("What is the code of the van?"), Helper::read<std::string>("What is the brand of the van?"), Helper::read<int>("What is the model of the van?"), Helper::read<int>("What is the mileage of the van?"), Helper::read<std::string>("What is the traction of the van?"));
-    Sale sale = Sale(0, van, chooseCustomer());
-    sales[lastSale] = sale;
+    Sale sale = Sale(Helper::read<int>("What is the price of the van?"), van, chooseCustomer());
+    sales[lastSale++] = sale;
 }
 
 void addNewMotorcycleSale(){
     Motorcycle* motorcycle = new Motorcycle(Helper::read<int>("What is the code of the motorcycle?"), Helper::read<std::string>("What is the brand of the motorcycle?"), Helper::read<int>("What is the model of the motorcycle?"), Helper::read<int>("What is the mileage of the motorcycle?"), Helper::read<int>("What is the cylinder capacity of the motorcycle?"));
-    Sale sale = Sale(0, motorcycle, chooseCustomer());
-    sales[lastSale] = sale;
+    Sale sale = Sale(Helper::read<int>("What is the price of the van?"), motorcycle, chooseCustomer());
+    sales[lastSale++] = sale;
 }
 
 bool customerExists(Customer customer){
@@ -102,11 +103,24 @@ void addNewCustomer() {
 }
 
 void printAllSales() {
-    
+    GenericSort<Sale>::insertionSort(sales, lastSale, GenericSort<Sale>::descending);
+    Helper::print("Printing all sales:");
+    for (int i = 0; i < lastSale; ++i) {
+        sales[i].print();
+    }
+    Helper::print("Operation finished");
 }
 
 void searchCustomerTransactions(){
-    
+    Helper::print("Searching customer transactions");
+    showAllCustomers();
+    int customerNumber = Helper::read<int>("What is the number of the customer in question?") - 1;
+    for (int i = 0; i < lastSale; ++i) {
+        if (sales[i].getCustomer() == customers[customerNumber]) {
+            sales[i].print();
+        }
+    }
+    Helper::print("Operation finished");
 }
 
 int main(int argc, const char * argv[]) {

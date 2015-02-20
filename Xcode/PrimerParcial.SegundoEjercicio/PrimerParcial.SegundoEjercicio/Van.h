@@ -11,12 +11,14 @@
 
 #include <stdio.h>
 #include "Vehicle.h"
+#include "Helper.h"
 
 class Van : public Vehicle{
 protected:
     std::string traction;
 public:
     Van(int newCode, std::string newBrand, int newModel, int newMileage, std::string newTraction);
+    virtual std::string details();
 };
 
 #endif /* defined(__PrimerParcial_SegundoEjercicio__Van__) */

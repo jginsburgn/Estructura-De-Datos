@@ -20,6 +20,7 @@ protected:
     int mileage;
 public:
     Vehicle(int newCode, std::string newBrand, int newModel, int newMileage);
+    virtual std::string details() { return ""; };
 };
 
 #endif /* defined(__PrimerParcial_SegundoEjercicio__Vehicle__) */

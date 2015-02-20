@@ -11,10 +11,12 @@
 
 #include <stdio.h>
 #include "Vehicle.h"
+#include "Helper.h"
 
 class Car : public Vehicle{
 public:
     Car(int newCode, std::string newBrand, int newModel, int newMileage);
+    virtual std::string details();
 };
 
 #endif /* defined(__PrimerParcial_SegundoEjercicio__Car__) */
