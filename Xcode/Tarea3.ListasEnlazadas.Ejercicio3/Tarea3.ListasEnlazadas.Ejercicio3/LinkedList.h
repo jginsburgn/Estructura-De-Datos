@@ -40,12 +40,12 @@ namespace vcn {
         int size() const;
         bool empty();
         
-        virtual void insert(T, int);
-        virtual void insert(Node<T> *, int);
-        virtual void insertFront(T);
-        virtual void insertFront(Node<T> *);
-        virtual void insertBack(T);
-        virtual void insertBack(Node<T> *);
+        void insert(T, int);
+        void insert(Node<T> *, int);
+        void insertFront(T);
+        void insertFront(Node<T> *);
+        void insertBack(T);
+        void insertBack(Node<T> *);
         
         Node<T> * remove(int);
         Node<T> *  removeFront();

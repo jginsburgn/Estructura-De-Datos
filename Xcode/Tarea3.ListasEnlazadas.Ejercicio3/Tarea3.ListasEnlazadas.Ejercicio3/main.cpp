@@ -71,6 +71,7 @@ void mainMenu(){
                 break;
         }
     }
+    delete persons;
 }
 
 Person * getPerson(){

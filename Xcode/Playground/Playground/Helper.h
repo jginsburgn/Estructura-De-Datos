@@ -17,6 +17,24 @@
 class Helper {
 public:
     
+    static std::string readLine(std::string prompt){
+        Helper::print(prompt);
+        std::string input = "";
+        char character = std::cin.get();
+        while (!(character <= 126 && character >= 32)) {
+            character = std::cin.get();
+        }
+        while (character != '\n') {
+            input += character;
+            character = std::cin.get();
+        }
+        return input;
+    }
+    
+    static void printSpace(){
+        Helper::print("");
+    }
+    
     static int menu(std::string name, std::string options[], int availableOptions){
         Helper::print("");
         Helper::print("-----> Welcome to the " + name + " menu:");
