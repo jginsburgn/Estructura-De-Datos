@@ -15,9 +15,18 @@
 
 class Message{
 public:
-    std::string transmitter = Token::emptyAddress();
-    std::string receiver = Token::emptyAddress();
-    std::string message = Token::emptyMessage();
+    
+    std::string transmitter;
+    std::string receiver;
+    std::string message;
+    
+    Message() {
+        transmitter = "0.0.0.0";
+        receiver = "0.0.0.0";
+        message = "";
+    }
+    
+
     
     bool operator == (Message & comparingMessage){
         return message==comparingMessage.message && transmitter==comparingMessage.transmitter && receiver==comparingMessage.receiver;
@@ -28,9 +37,9 @@ public:
     }
     
     friend std::ostream & operator << (std::ostream & os, Message & message){
-        std::cout << "Transmitter: " << message.transmitter << std::endl;
-        std::cout << "Receiver: " << message.receiver << std::endl;
-        std::cout << "Message: " << message.message << std::endl;
+        std::cout << "---  Transmitter: " << message.transmitter << std::endl;
+        std::cout << "---  Receiver: " << message.receiver << std::endl;
+        std::cout << "---  Message: " << message.message << std::endl;
         return os;
     }
 };

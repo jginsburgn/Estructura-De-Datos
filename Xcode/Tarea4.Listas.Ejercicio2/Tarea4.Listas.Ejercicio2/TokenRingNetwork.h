@@ -16,10 +16,11 @@
 #include "Helper.h"
 #include <thread>
 #include "EndDevice.h"
+#include <unistd.h>
 
 class TokenRingNetwork {
     
-private:
+public:
     
     std::string name = "No name";
     CircularLinkedList<EndDevice> * endDevices;
@@ -30,7 +31,6 @@ private:
     void initializeNetwork();
     void terminateNetwork();
     
-public:
     int delay = 0;
     bool shouldRun = true;
     bool on = false;
@@ -47,8 +47,6 @@ public:
         delete endDevices;
     };
     
-    void run();
-    
     CircularLinkedList<EndDevice> * getEndDevices() {return endDevices;};
     
     int getDelay() {return delay;};
@@ -58,6 +56,8 @@ public:
     void openConsole();
     
     void printDevices();
+    
+    void accessConsoleOfDevice();
 };
 
 #endif /* defined(__Tarea4_Listas_Ejercicio2__TokenRingNetwork__) */

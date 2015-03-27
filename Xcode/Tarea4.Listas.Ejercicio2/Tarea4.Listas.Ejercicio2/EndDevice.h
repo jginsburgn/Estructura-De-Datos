@@ -15,6 +15,7 @@
 #include "Queue.h"
 #include "Message.h"
 #include "Token.h"
+#include "Helper.h"
 
 class EndDevice {
     
@@ -24,12 +25,16 @@ private:
     std::string address;
     Queue<Message> * outgoingCommunications;
     Queue<Message> * incomingCommunications;
-    LinkedList<Message> * history;
     Message lastSentMessage;
     
 public:
     
-    EndDevice() : name("No name"), address("0.0.0.0"), outgoingCommunications(new Queue<Message>()), incomingCommunications(new Queue<Message>()), history(new LinkedList<Message>()) {};
+    EndDevice() {
+        name = "No name";
+        address = "0.0.0.0";
+        outgoingCommunications = new Queue<Message>();
+        incomingCommunications = new Queue<Message>();
+    };
     ~EndDevice() {};
     
     std::string getName() {return name;};
@@ -45,6 +50,10 @@ public:
     void deliverToken(Token token);
     
     void openConsole();
+    
+    void printOutgoingCommunication();
+    void printIncomingCommunication();
+    void enqueueNewOutgoingMessage();
 };
 
 #endif /* defined(__Tarea4_Listas_Ejercicio2__EndDevice__) */

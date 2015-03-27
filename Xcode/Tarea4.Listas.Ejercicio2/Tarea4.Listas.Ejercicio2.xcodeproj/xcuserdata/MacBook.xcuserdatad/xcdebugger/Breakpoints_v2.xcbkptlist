@@ -10,12 +10,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tarea4.Listas.Ejercicio2/TokenRingNetwork.cpp"
-            timestampString = "449130631.448429"
+            timestampString = "449137682.381837"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "TokenRingNetwork::openConsole()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tarea4.Listas.Ejercicio2/TokenRingNetwork.cpp"
+            timestampString = "449137707.086922"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "TokenRingNetwork::printDevices()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
