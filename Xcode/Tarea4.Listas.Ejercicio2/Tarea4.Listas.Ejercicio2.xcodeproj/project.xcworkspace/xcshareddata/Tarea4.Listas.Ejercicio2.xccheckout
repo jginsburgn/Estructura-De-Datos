@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>392383E2-8BA1-4714-AA94-1BBC75412950</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Tarea4.Listas.Ejercicio2</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9E87751665FF471B4296D7BED16921BCDE24237E</key>
+		<string>https://github.com/jginsburgn/Estructura-De-Datos.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Xcode/Tarea4.Listas.Ejercicio2/Tarea4.Listas.Ejercicio2.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9E87751665FF471B4296D7BED16921BCDE24237E</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jginsburgn/Estructura-De-Datos.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9E87751665FF471B4296D7BED16921BCDE24237E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9E87751665FF471B4296D7BED16921BCDE24237E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Estructura-De-Datos</string>
+		</dict>
+	</array>
+</dict>
+</plist>
