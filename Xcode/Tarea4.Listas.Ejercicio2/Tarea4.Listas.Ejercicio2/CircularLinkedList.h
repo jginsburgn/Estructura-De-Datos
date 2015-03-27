@@ -21,7 +21,7 @@ using namespace vcn;
         Node<T> * _last = nullptr;
         
     public:
-        CircularLinkedList() {}
+        CircularLinkedList() : _last(nullptr) {}
         virtual ~CircularLinkedList();
         
         /* Obtener un apuntador al último elemento */

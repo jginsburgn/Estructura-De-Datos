@@ -19,16 +19,20 @@ class Token {
     
 private:
     
-    std::string transmitter = Token::emptyAddress();
-    std::string receiver = Token::emptyAddress();
-    std::string message = Token::emptyMessage();
+    std::string transmitter;
+    std::string receiver;
+    std::string message;
     
 public:
     
     static std::string emptyAddress() {return "0.0.0.0";};
     static std::string emptyMessage() {return "";};
     
-    Token();
+    Token() {
+        transmitter = "0.0.0.0";
+        receiver = "0.0.0.0";
+        message =  "";
+    };
     
     void setTransmitter(std::string newTransmitter) {transmitter = newTransmitter;};
     void setReceiver(std::string newReceiver) {receiver = newReceiver;};

@@ -35,7 +35,7 @@ namespace vcn {
         };
     
     public:
-        LinkedList() {}
+        LinkedList() : _first(nullptr) {_size = 0;}
         virtual ~LinkedList();
         
         /* Obtener un apuntador al primer elemento */

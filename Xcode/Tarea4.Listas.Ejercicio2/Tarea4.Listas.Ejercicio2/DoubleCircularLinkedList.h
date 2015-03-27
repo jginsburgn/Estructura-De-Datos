@@ -21,7 +21,7 @@ protected:
     Node<T> * _last = nullptr;
     
 public:
-    DoubleCircularLinkedList() {}
+    DoubleCircularLinkedList() : _last(nullptr) {}
     virtual ~DoubleCircularLinkedList();
     
     /* Obtener un apuntador al último elemento */

@@ -8,6 +8,15 @@
 
 #include "TokenRingNetwork.h"
 
+void TokenRingNetwork::printDevices() {
+    for (int i = 0; i < endDevices->size(); ++i) {
+        EndDevice ed = endDevices->at(i)->getInfo();
+        std::cout << "  **End device " << i+1 << ":" << std::endl;
+        std::cout << "    ----Name: " << ed.getName() << std::endl;
+        std::cout << "    ----Address: " << ed.getAddress() << std::endl;
+    }
+}
+
 bool TokenRingNetwork::addEndDevice(){
     
     EndDevice * newEndDevice = new EndDevice();
@@ -29,22 +38,38 @@ bool TokenRingNetwork::addEndDevice(){
     }
     else{
         Helper::print("Connecting device");
-        endDevices->insertFront(*newEndDevice);
+        Node<EndDevice> * node = new Node<EndDevice>();
+        node->setInfo(*newEndDevice);
+        endDevices->insertBack(node);
     }
     
     return true;
 }
 
 bool TokenRingNetwork::removeEndDevice(){
+    printDevices();
+    delete endDevices->remove(Helper::read<int>("Enter the number of the device to disconnect.")-1);
     return true;
 }
 
+void TokenRingNetwork::run(){
+    on = true;
+    Node<EndDevice> * tmp = getEndDevices()->first();
+    while (shouldRun && tmp != nullptr) {
+        EndDevice ed = tmp->getInfo();
+        ed.deliverToken(token);
+        tmp = tmp->getNext();
+    }
+    on = false;
+}
+
 void TokenRingNetwork::initializeNetwork(){
-    
+    shouldRun = true;
+    std::thread first(&TokenRingNetwork::run);
 }
 
 void TokenRingNetwork::terminateNetwork(){
-    
+    shouldRun = false;
 }
 
 void TokenRingNetwork::openConsole(){
@@ -68,7 +93,8 @@ void TokenRingNetwork::openConsole(){
                 std::cout << "Network's name: " << name << std::endl;
                 std::cout << "Network's status: " << status << std::endl;
                 std::cout << "Network's delay: " << Helper::intToString(getDelay()) << std::endl;
-                std::cout << "Network's devices: " << std::endl << *endDevices << std::endl;
+                std::cout << "Network's devices: " << std::endl;
+                printDevices();
                 Helper::print("Operation finished.");
                 break;
             case 2:

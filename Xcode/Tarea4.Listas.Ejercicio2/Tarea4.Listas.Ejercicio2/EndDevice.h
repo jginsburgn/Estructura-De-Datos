@@ -20,17 +20,17 @@ class EndDevice {
     
 private:    
     
-    std::string name = "No name";
-    std::string address = Token::emptyAddress();
-    Queue<Message> * outgoingCommunications = new Queue<Message>();
-    Queue<Message> * incomingCommunications = new Queue<Message>();
-    LinkedList<Message> * history = new LinkedList<Message>();
+    std::string name;
+    std::string address;
+    Queue<Message> * outgoingCommunications;
+    Queue<Message> * incomingCommunications;
+    LinkedList<Message> * history;
     Message lastSentMessage;
     
 public:
     
-    EndDevice();
-    ~EndDevice() {delete outgoingCommunications; delete incomingCommunications; delete history;};
+    EndDevice() : name("No name"), address("0.0.0.0"), outgoingCommunications(new Queue<Message>()), incomingCommunications(new Queue<Message>()), history(new LinkedList<Message>()) {};
+    ~EndDevice() {};
     
     std::string getName() {return name;};
     void setName(std::string newName) {name = newName;};

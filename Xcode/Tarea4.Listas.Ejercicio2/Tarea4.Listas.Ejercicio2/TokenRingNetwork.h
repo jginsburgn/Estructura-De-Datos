@@ -22,10 +22,7 @@ class TokenRingNetwork {
 private:
     
     std::string name = "No name";
-    CircularLinkedList<EndDevice> * endDevices = new CircularLinkedList<EndDevice>();
-    bool shouldRun = true;
-    bool on = false;
-    std::thread processingThread;
+    CircularLinkedList<EndDevice> * endDevices;
     
     bool addEndDevice();
     bool removeEndDevice();
@@ -35,12 +32,22 @@ private:
     
 public:
     int delay = 0;
+    bool shouldRun = true;
+    bool on = false;
+    Token token;
     
-    TokenRingNetwork() : delay(0) {} ;
-    TokenRingNetwork(std::string newName) {name=newName; delay=0;};
+    TokenRingNetwork() {
+        delay = 0;
+        endDevices = new CircularLinkedList<EndDevice>();
+        shouldRun = true;
+        on = false;
+    };
+    TokenRingNetwork(std::string newName) : TokenRingNetwork() {name=newName; delay=0;};
     ~TokenRingNetwork() {
         delete endDevices;
     };
+    
+    void run();
     
     CircularLinkedList<EndDevice> * getEndDevices() {return endDevices;};
     
@@ -49,6 +56,8 @@ public:
     bool isOn() {return on;};
     
     void openConsole();
+    
+    void printDevices();
 };
 
 #endif /* defined(__Tarea4_Listas_Ejercicio2__TokenRingNetwork__) */
