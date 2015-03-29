@@ -25,15 +25,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FAA3AAF91AC78A5F000D2BBD /* CircularLinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircularLinkedList.h; sourceTree = "<group>"; };
+		FAA3AAFA1AC78A72000D2BBD /* LinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkedList.h; sourceTree = "<group>"; };
+		FAA3AAFB1AC78A86000D2BBD /* Node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		FAA3AAFC1AC78AA0000D2BBD /* Queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
+		FAA3AAFD1AC78AB0000D2BBD /* Stack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stack.h; sourceTree = "<group>"; };
 		FAD65AE31AC49FCD005F4977 /* Tarea4.Listas.Ejercicio2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tarea4.Listas.Ejercicio2; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD65AE61AC49FCD005F4977 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		FAD65AED1AC4FC4F005F4977 /* DoubleCircularLinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoubleCircularLinkedList.h; sourceTree = "<group>"; };
-		FAD65AEE1AC4FC4F005F4977 /* LinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkedList.h; sourceTree = "<group>"; };
-		FAD65AEF1AC4FC4F005F4977 /* CircularLinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircularLinkedList.h; sourceTree = "<group>"; };
-		FAD65AF01AC4FC4F005F4977 /* Node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		FAD65AF11AC4FC4F005F4977 /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
-		FAD65AF21AC4FC4F005F4977 /* Queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
-		FAD65AF31AC4FC4F005F4977 /* Stack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stack.h; sourceTree = "<group>"; };
 		FAD65AF51AC4FD43005F4977 /* EndDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EndDevice.cpp; sourceTree = "<group>"; };
 		FAD65AF61AC4FD43005F4977 /* EndDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndDevice.h; sourceTree = "<group>"; };
 		FAD65AF91AC4FDC0005F4977 /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
@@ -87,13 +87,13 @@
 		FAD65AF41AC4FC5C005F4977 /* vcn */ = {
 			isa = PBXGroup;
 			children = (
+				FAA3AAFD1AC78AB0000D2BBD /* Stack.h */,
+				FAA3AAFC1AC78AA0000D2BBD /* Queue.h */,
+				FAA3AAFB1AC78A86000D2BBD /* Node.h */,
+				FAA3AAFA1AC78A72000D2BBD /* LinkedList.h */,
+				FAA3AAF91AC78A5F000D2BBD /* CircularLinkedList.h */,
 				FAD65AF11AC4FC4F005F4977 /* Helper.h */,
 				FAD65AED1AC4FC4F005F4977 /* DoubleCircularLinkedList.h */,
-				FAD65AEE1AC4FC4F005F4977 /* LinkedList.h */,
-				FAD65AEF1AC4FC4F005F4977 /* CircularLinkedList.h */,
-				FAD65AF01AC4FC4F005F4977 /* Node.h */,
-				FAD65AF21AC4FC4F005F4977 /* Queue.h */,
-				FAD65AF31AC4FC4F005F4977 /* Stack.h */,
 			);
 			name = vcn;
 			sourceTree = "<group>";
@@ -270,6 +270,7 @@
 				FAD65AEC1AC49FCD005F4977 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

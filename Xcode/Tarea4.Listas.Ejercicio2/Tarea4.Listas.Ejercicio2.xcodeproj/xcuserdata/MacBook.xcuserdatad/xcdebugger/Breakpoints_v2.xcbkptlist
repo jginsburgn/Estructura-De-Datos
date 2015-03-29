@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tarea4.Listas.Ejercicio2/TokenRingNetwork.cpp"
-            timestampString = "449137682.381837"
+            timestampString = "449289238.49655"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "TokenRingNetwork::openConsole()"
             landmarkType = "5">
          </BreakpointContent>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Tarea4.Listas.Ejercicio2/TokenRingNetwork.cpp"
-            timestampString = "449137707.086922"
+            filePath = "Tarea4.Listas.Ejercicio2/EndDevice.cpp"
+            timestampString = "449291461.520902"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "TokenRingNetwork::printDevices()"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "EndDevice::deliverToken(Token token)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -37,14 +37,37 @@ public:
     };
     ~EndDevice() {};
     
-    std::string getName() {return name;};
+    EndDevice(const EndDevice & source){
+        name = source.getName();
+        address = source.getAddress();
+        outgoingCommunications = new Queue<Message>();
+        incomingCommunications = new Queue<Message>();
+        
+//        const Queue<Message> * ic = source.getIncomingCommunications();
+//        const Queue<Message> * oc = source.getIncomingCommunications();
+//        
+//        for (int i = 0; i < ic->size(); ++i) {
+//            Node<Message> * message = ic->at(i);
+//            
+//            incomingCommunications->enqueue();
+//        }
+        
+    };// Deep copy
+    
+    std::string getName() const  {return name;};
     void setName(std::string newName) {name = newName;};
     
-    std::string getAddress() {return address;};
+    std::string getAddress() const {return address;};
     void setAddress(std::string newAddress) {address = newAddress;};
+    
+    const Queue<Message> * getOutgoingCommunications() const { return outgoingCommunications; };
+    const Queue<Message> * getIncomingCommunications() const { return incomingCommunications; };
     
     bool operator==(EndDevice & endDevice);
     bool operator!=(EndDevice & endDevice);
+    
+    bool operator==(const EndDevice & endDevice);
+    bool operator!=(const EndDevice & endDevice);
     friend std::ostream & operator << (std::ostream & os, EndDevice & endDevice);
     
     void deliverToken(Token token);

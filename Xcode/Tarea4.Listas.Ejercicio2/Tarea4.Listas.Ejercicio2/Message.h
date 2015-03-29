@@ -26,13 +26,11 @@ public:
         message = "";
     }
     
-
-    
-    bool operator == (Message & comparingMessage){
+    bool operator == (const Message & comparingMessage){
         return message==comparingMessage.message && transmitter==comparingMessage.transmitter && receiver==comparingMessage.receiver;
     }
     
-    bool operator != (Message & comparingMessage) {
+    bool operator != (const Message & comparingMessage) {
         return !this->operator==(comparingMessage);
     }
     

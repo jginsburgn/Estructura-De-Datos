@@ -23,8 +23,12 @@ void TokenRingNetwork::accessConsoleOfDevice(){
         menu[i] = choice;
     }
     std::string menuName = "device console access ";
-    Helper::menu(menuName, menu, availableOptions);
-    delete menu;
+    int index = Helper::menu(menuName, menu, availableOptions) - 1;
+    while (index < 0 || index >= availableOptions) {
+        Helper::print("Option out of bounds.");
+        index = Helper::menu(menuName, menu, availableOptions) - 1;
+    }
+    endDevices->at(index)->getInfo().openConsole();
 }
 
 void TokenRingNetwork::printDevices() {
@@ -34,7 +38,7 @@ void TokenRingNetwork::printDevices() {
         std::cout << "  **End device " << i+1 << ":" << std::endl;
         std::cout << "    ----Name: " << ed.getName() << std::endl;
         std::cout << "    ----Address: " << ed.getAddress() << std::endl;
-        i = i+1;
+        i = i + 1;
     }
 }
 
@@ -82,7 +86,9 @@ void f1(TokenRingNetwork * trn){
             EndDevice ed = tmp->getInfo();
             ed.deliverToken(trn->token);
             tmp = tmp->getNext();
+            sleep(trn->delay);
         }
+        else tmp = trn->getEndDevices()->first();
     }
     trn->on = false;
     Helper::print("Terminating parallel process");

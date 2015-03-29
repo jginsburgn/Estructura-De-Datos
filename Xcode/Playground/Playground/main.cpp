@@ -14,12 +14,19 @@ class Libro {
     
 };
 
+int fact(int a){
+    if (a>0){
+        if(a==1){
+            return 1;
+        }
+        else{
+            return a*fact(a-1);
+        }
+    }
+    return 0;
+}
+
 int main(int argc, const char * argv[]) {
-    std::string options[3];
-    options[0] = "1";
-    options[1] = "2";
-    options[2] = "3";
-    std::cout << Helper::menu("main", options, 3) << std::endl;
-    std::cout << *(options+1) << std::endl;
+    Helper::print(Helper::intToString(fact(Helper::read<int>("Enter number:"))));
     return 0;
 }
