@@ -12,13 +12,13 @@ void TokenRingNetwork::accessConsoleOfDevice(){
     const int availableOptions = endDevices->size();
     std::string * menu = new std::string[availableOptions]();
     for (int i = 0; i < availableOptions; ++i) {
-        EndDevice ed = endDevices->at(i)->getInfo();
+        EndDevice * ed = endDevices->at(i)->getInfo();
         std::string choice = "";
         choice.append(Helper::intToString(i+1));
         choice.append(" for accessing device ");
-        choice.append(ed.getName());
+        choice.append(ed->getName());
         choice.append(" (");
-        choice.append(ed.getAddress());
+        choice.append(ed->getAddress());
         choice.append(")");
         menu[i] = choice;
     }
@@ -28,16 +28,16 @@ void TokenRingNetwork::accessConsoleOfDevice(){
         Helper::print("Option out of bounds.");
         index = Helper::menu(menuName, menu, availableOptions) - 1;
     }
-    endDevices->at(index)->getInfo().openConsole();
+    endDevices->at(index)->getInfo()->openConsole();
 }
 
 void TokenRingNetwork::printDevices() {
     int i = 0;
     while (i < endDevices->size()) {
-        EndDevice ed = endDevices->at(i)->getInfo();
+        EndDevice * ed = endDevices->at(i)->getInfo();
         std::cout << "  **End device " << i+1 << ":" << std::endl;
-        std::cout << "    ----Name: " << ed.getName() << std::endl;
-        std::cout << "    ----Address: " << ed.getAddress() << std::endl;
+        std::cout << "    ----Name: " << ed->getName() << std::endl;
+        std::cout << "    ----Address: " << ed->getAddress() << std::endl;
         i = i + 1;
     }
 }
@@ -53,7 +53,7 @@ bool TokenRingNetwork::addEndDevice(){
     
     bool deviceExists = false;
     for (int i = 0; i < endDevices->size(); ) {
-        if (endDevices->at(i)->getInfo()==*newEndDevice) {
+        if (*(endDevices->at(i)->getInfo())==*newEndDevice) {
             deviceExists = true;
         }
         i = i +1;
@@ -65,7 +65,7 @@ bool TokenRingNetwork::addEndDevice(){
     }
     else{
         Helper::print("Connecting device");
-        Node<EndDevice> * node = new Node<EndDevice>(*newEndDevice);
+        Node<EndDevice *> * node = new Node<EndDevice *>(newEndDevice);
         endDevices->insertBack(node);
     }
     
@@ -80,11 +80,11 @@ bool TokenRingNetwork::removeEndDevice(){
 
 void f1(TokenRingNetwork * trn){
     Helper::print("Initializing parallel process");
-    Node<EndDevice> * tmp = trn->getEndDevices()->first();
+    Node<EndDevice *> * tmp = trn->getEndDevices()->first();
     while (trn->shouldRun) {
         if (tmp != nullptr) {
-            EndDevice ed = tmp->getInfo();
-            ed.deliverToken(trn->token);
+            EndDevice * ed = tmp->getInfo();
+            ed->deliverToken(trn->getToken());
             tmp = tmp->getNext();
             sleep(trn->delay);
         }
@@ -92,6 +92,7 @@ void f1(TokenRingNetwork * trn){
     }
     trn->on = false;
     Helper::print("Terminating parallel process");
+    Helper::print("Operation finished.");
 }
 
 void f2(TokenRingNetwork * trn){
@@ -127,7 +128,6 @@ void f2(TokenRingNetwork * trn){
             case 3:
                 Helper::print("Terminating network");
                 trn->terminateNetwork();
-                Helper::print("Operation finished.");
                 break;
             case 4:
                 Helper::print("Connecting a new device to the network");
@@ -162,10 +162,11 @@ void f2(TokenRingNetwork * trn){
 }
 
 void TokenRingNetwork::initializeNetwork(){
-    Helper::print("Operation finished.");
     shouldRun = true;
     on = true;
     std::thread first(f1, this);
+    sleep(2);
+    Helper::print("Operation finished.");
     std::thread second(f2, this);
     first.join();
     second.join();

@@ -70,7 +70,7 @@ public:
     bool operator!=(const EndDevice & endDevice);
     friend std::ostream & operator << (std::ostream & os, EndDevice & endDevice);
     
-    void deliverToken(Token token);
+    void deliverToken(Token * token);
     
     void openConsole();
     

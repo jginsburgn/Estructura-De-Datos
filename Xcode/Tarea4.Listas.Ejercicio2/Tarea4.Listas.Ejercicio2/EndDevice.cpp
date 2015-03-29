@@ -8,33 +8,41 @@
 
 #include "EndDevice.h"
 
-void EndDevice::deliverToken(Token token){
-    if (token.isAvailable()) {
+void EndDevice::deliverToken(Token * token){
+    if (token->isAvailable()) {
         if (!outgoingCommunications->empty()) {
             Message m = outgoingCommunications->dequeue()->getInfo();
-            token.setTransmitter(address);
-            token.setReceiver(m.receiver);
-            token.setMessage(m.message);
+            token->setTransmitter(address);
+            token->setReceiver(m.receiver);
+            token->setMessage(m.message);
             lastSentMessage = m;
         }
     }
     else{
-        if (address == token.getReceiver()) {
+        if (address == token->getReceiver()) {
             Message m;
-            m.message = token.fetchMessage();
-            m.receiver = token.getReceiver();
-            m.transmitter = token.getTransmitter();
+            m.message = token->fetchMessage();
+            m.receiver = token->getReceiver();
+            m.transmitter = token->getTransmitter();
             incomingCommunications->enqueue(m);
+            if (address == token->getTransmitter()) {
+                token->makeAvailable();
+            }
         }
-        else if (address == token.getTransmitter()) {
-            if (token.getMessage() == Token::emptyMessage()) {
-                token.makeAvailable();
+        else if (address == token->getTransmitter()) {
+            if (token->getMessage() == Token::emptyMessage()) {
+                token->makeAvailable();
             }
             else{
-                Helper::print("Message receiver is not responding.");
-                if (Helper::read<int>("1 for discarding message or any key for trying again:")==1) {
-                    token.makeAvailable();
-                }
+                std::string notification = "";
+                notification.append(token->getReceiver());
+                notification.append(" is not responding. Deleting message: ");
+                notification.append(token->getMessage());
+                std::ios_base::sync_with_stdio(false);
+                std::cin.tie(nullptr);
+                std::cerr.tie(nullptr);
+                Helper::print(notification);
+                token->makeAvailable();
             }
         }
     }

@@ -23,7 +23,12 @@ class TokenRingNetwork {
 public:
     
     std::string name = "No name";
-    CircularLinkedList<EndDevice> * endDevices;
+    CircularLinkedList<EndDevice *> * endDevices;
+    
+    int delay = 0;
+    bool shouldRun = true;
+    bool on = false;
+    Token * token;
     
     bool addEndDevice();
     bool removeEndDevice();
@@ -31,15 +36,11 @@ public:
     void initializeNetwork();
     void terminateNetwork();
     
-    int delay = 0;
-    bool shouldRun = true;
-    bool on = false;
-    Token token;
-    
     TokenRingNetwork() {
         delay = 0;
-        endDevices = new CircularLinkedList<EndDevice>();
+        endDevices = new CircularLinkedList<EndDevice *>();
         shouldRun = true;
+        token = new Token(0);
         on = false;
     };
     TokenRingNetwork(std::string newName) : TokenRingNetwork() {name=newName; delay=0;};
@@ -47,7 +48,9 @@ public:
         delete endDevices;
     };
     
-    CircularLinkedList<EndDevice> * getEndDevices() {return endDevices;};
+    CircularLinkedList<EndDevice *> * getEndDevices() {return endDevices;};
+    
+    Token * getToken() {return token;};
     
     int getDelay() {return delay;};
     
