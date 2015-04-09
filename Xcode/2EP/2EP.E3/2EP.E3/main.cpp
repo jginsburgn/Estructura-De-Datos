@@ -10,8 +10,14 @@
 #include "Helper.h"
 #include "LinkedList.h"
 #include "Stack.h"
+#include "StackB.h"
 #include <vector>
 #include <stack>
+
+struct parenthesis {
+    int initial;
+    int final;
+};
 
 using namespace vcn;
 
@@ -91,9 +97,9 @@ bool isMathInitialDelimiter(char c){
         case '(':
             return true;
             break;
-        case '{':
-            return true;
-            break;
+//        case '{':
+//            return true;
+//            break;
         case '[':
             return true;
             break;
@@ -108,9 +114,9 @@ bool isMathFinalDelimiter(char c){
         case ')':
             return true;
             break;
-        case '}':
-            return true;
-            break;
+//        case '}':
+//            return true;
+//            break;
         case ']':
             return true;
             break;
@@ -125,9 +131,9 @@ char closerForOpener(char c){
         case '(':
             return ')';
             break;
-        case '{':
-            return '}';
-            break;
+//        case '{':
+//            return '}';
+//            break;
         case '[':
             return ']';
             break;
@@ -139,7 +145,13 @@ char closerForOpener(char c){
 
 bool isSet(std::string expression){
     const char * asdf = expression.c_str();
-    return asdf[0]=='{' && asdf[expression.length()-1]=='}';
+    bool noOperators = true;
+    for (int i = 0; i < expression.length(); ++i) {
+        if (asdf[i]=='+' || asdf[i]=='*' || isMathFinalDelimiter(asdf[i]) || isMathInitialDelimiter(asdf[i])) {
+            noOperators = false;
+        }
+    }
+    return asdf[0]=='{' && asdf[expression.length()-1]=='}' && noOperators;
 }
 
 LinkedList<int> * setFromExpression(std::string expression){
@@ -147,7 +159,7 @@ LinkedList<int> * setFromExpression(std::string expression){
     LinkedList<int> * set = new LinkedList<int>();
     for (int i = 0; i < numbers.size(); ++i) {
         if (i==0) {
-            int num = atoi(split(numbers[0], '{')[1].c_str());
+            int num = atoi(numbers[0].substr(1).c_str());
             set->insertFront(num);
         }
         else if (i==numbers.size()-1){
@@ -162,31 +174,70 @@ LinkedList<int> * setFromExpression(std::string expression){
     return set;
 }
 
+parenthesis positionOfParenthesis(std::string expression){
+    using namespace vcn;
+    
+    parenthesis returner;
+    bool initialset = false;
+    bool finalset = false;
+    StackB<char> * parentheses = new StackB<char>();
+    const char * charMathEquation = expression.c_str();
+    
+    for (int i = 0; i < expression.length(); ++i) {
+        char currentChar = charMathEquation[i];
+        if (isMathInitialDelimiter(currentChar)) {
+            parentheses->push(currentChar);
+            if (!initialset) {
+                returner.initial = i;
+                initialset=true;
+            }
+        }
+        else if (isMathFinalDelimiter(currentChar)){
+            Node<char> * currentNode = parentheses->pop();
+            if (closerForOpener(currentNode->getInfo())==currentChar) {
+                delete currentNode;
+                if (parentheses->empty() && !finalset) {
+                    returner.final = i;
+                    finalset=true;
+                }
+            }
+            else {
+                std::cout << "The equation is not balanced." << std::endl;
+            }
+        }
+    }
+    return returner;
+}
+
 LinkedList<int> * parseExpression(std::string expression){
     if (isSet(expression)) {
         return setFromExpression(expression);
     }
     else{
-        const char * charMathEquation = expression.c_str();
-        std::vector<std::string> subExpressions;
-        std::string subExpression = "";
-        for (int i = 0; i < expression.length(); ++i) {
-            char currentChar = charMathEquation[i];
-            if (isMathInitialDelimiter(currentChar)) {
+        std::string tmp = expression;
+        std::vector<parenthesis> parentheses;
+        std::vector<std::string> subexpressions;
+        int p = 0;
+        while (!isSet(tmp)) {
+            parentheses.push_back(positionOfParenthesis(tmp));
+            if (parentheses[p].final+2 > tmp.length()-1) {
+                tmp = "{}";
             }
-            else if (isMathFinalDelimiter(currentChar)){
-
-            }
+            else tmp = tmp.substr(parentheses[p].final+2);
+            p++;
         }
     }
+    return nullptr;
 }
 
 
 int main(int argc, const char * argv[]) {
-    std::string expression = Helper::read<std::string>("Enter an expresssion:");
-    std::vector<std::string> splitplus = split(expression, '+');
-    for (int i = 0; i < splitplus.size(); ++i) {
-        Helper::print(splitplus[i]);
-    }
+    std::string fd = "{}+{}*({}+({}*{})*{})+({}+{})";
+    parenthesis  p = positionOfParenthesis(fd);
+    Helper::print(Helper::intToString(p.initial));
+    Helper::print(Helper::intToString(p.final));
+    Helper::print(fd.substr(p.initial + 1 , p.final-p.initial-1));
+    LinkedList<int> * ll = parseExpression(Helper::read<std::string>("Enter expression:"));
+    std::cout << *ll << std::endl;
     return 0;
 }

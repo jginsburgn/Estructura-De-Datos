@@ -262,9 +262,17 @@ namespace vcn {
     template <class T>
     std::ostream & operator <<(std::ostream & os, LinkedList<T> & list)
     {
-        for (auto node : list )
-        {
-            os << node << std::endl;
+        
+        for (int i = 0; i < list.size(); ++i) {
+            if (i==0) {
+                os << '{' << list.at(i)->getInfo() << ",";
+            }
+            else if (i == (list.size()-1)){
+                os << list.at(i)->getInfo() << "}";
+            }
+            else{
+                os << list.at(i)->getInfo() << ",";
+            }
         }
         
         return os;

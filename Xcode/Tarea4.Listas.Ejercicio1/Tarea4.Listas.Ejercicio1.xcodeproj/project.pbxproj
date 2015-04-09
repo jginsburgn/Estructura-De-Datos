@@ -244,6 +244,7 @@
 				FAD65AD21AC3A1F2005F4977 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
