@@ -8,25 +8,34 @@
 
 #include <iostream>
 #include "Helper.h"
+#include <vector>
 
-class Libro {
-    int isbn;
+class a{
+private:
+    std::string * info = new std::string();
+public:
+    
+    a() {
+        std::cout << "Calling constructor of a" << std::endl;
+    };
+    ~a() {
+        std::cout << "Calling destructor of a" << std::endl;
+        delete info;
+    };
+    a(a& source) {
+        std::cout << "Calling copy method of a" << std::endl;
+        *info = source.getInfo();
+    };
+    
+    std::string getInfo() const {return *info;};
+    void setInfo(std::string newInfo) {*info = newInfo;};
     
 };
 
-int fact(int a){
-    if (a>0){
-        if(a==1){
-            return 1;
-        }
-        else{
-            return a*fact(a-1);
-        }
-    }
-    return 0;
-}
-
 int main(int argc, const char * argv[]) {
-    Helper::print(Helper::intToString(fact(Helper::read<int>("Enter number:"))));
+    std::vector<a *> * as = new std::vector<a *>();
+    a * first = new a();
+    as->push_back(first);
+    delete as;
     return 0;
 }

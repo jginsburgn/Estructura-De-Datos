@@ -5,20 +5,20 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>7129D2A3-7C37-400E-A97E-7986479B42F0</string>
+	<string>5D00C4C4-FAF9-428A-BA3D-2DF5D2E580C9</string>
 	<key>IDESourceControlProjectName</key>
-	<string>DataStructures</string>
+	<string>Tarea5.BinaryTrees.E1</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>9E87751665FF471B4296D7BED16921BCDE24237E</key>
 		<string>https://github.com/jginsburgn/Estructura-De-Datos.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Xcode/DataStructures.xcworkspace</string>
+	<string>Xcode/Tarea5.BinaryTrees.E1/Tarea5.BinaryTrees.E1.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>9E87751665FF471B4296D7BED16921BCDE24237E</key>
-		<string>../..</string>
+		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/jginsburgn/Estructura-De-Datos.git</string>
