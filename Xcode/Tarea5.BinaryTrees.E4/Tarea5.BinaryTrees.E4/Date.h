@@ -40,12 +40,9 @@ public:
     bool operator == (const Date & otherDate) const;
     bool operator > (const Date & otherDate) const;
     bool operator < (const Date & otherDate) const;
+    
+    friend std::ostream & operator<<(std::ostream & os, const Date & date);
 };
-
-std::ostream & operator << (std::ostream & os, const Date & date){
-    os << Helper::intToString(date.getDay()) << "/" << Helper::intToString(date.getMonth()) << "/" << Helper::intToString(date.getYear());
-    return os;
-}
 
 
 

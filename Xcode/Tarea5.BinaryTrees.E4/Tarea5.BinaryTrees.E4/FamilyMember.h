@@ -44,7 +44,6 @@ public:
     //Additional Constructors
     FamilyMember(std::string newName, std::string newLastName);
     
-    
     //Getters    
         //Personal Information
     std::string getName() const {return *name;};
@@ -64,13 +63,13 @@ public:
     void setName(std::string newName) {*name = newName;};
     void setLastName(std::string newLastName) {*lastName = newLastName;};
     void setBirthday(Date newBirthday) {*birthday = newBirthday;};
-    void setDeathday(Date newDeathday) {*deathday = newDeathday;};
+    void setDeathday(Date newDeathday) {this->setLivingStatus(LSDeceased); *deathday = newDeathday;};
     void setGender(Gender newGender) {gender = newGender;};
     void setLivingStatus(LivingStatus newLivingStatus) {livingStatus = newLivingStatus;};
     
         //Relatives
-    void setFather(FamilyMember * newFather) {father = newFather;};
-    void setMother(FamilyMember * newMother) {mother = newMother;};
+    void setFather(FamilyMember * newFather) {father = newFather; newFather->insertChild(this);};
+    void setMother(FamilyMember * newMother) {mother = newMother; newMother->insertChild(this);};
     
     //Adding children
     bool insertChild(FamilyMember * child);
@@ -90,15 +89,12 @@ public:
     void showCousins() const;
     void showNephews() const;
     void showGrandchildrenExceptFor(const FamilyMember * thisSonsChildren) const;
+    
+    //Other methods
+    bool isAlive() const;
+    bool diedBeforeDate(Date date) const;
+    
+    friend std::ostream & operator<<(std::ostream & osd, FamilyMember & fm);
 };
-
-std::ostream & operator<<(std::ostream & os, FamilyMember & fm){
-    os << "\n" << "---------*****---------";
-    os << "Name: " << fm.getName() << std::endl;
-    os << "Last Name: " << fm.getLastName() << std::endl;
-    os << "Birthday: " << fm.getBirthday() << std::endl;
-    os << "Deathday" << fm.getDeathday() << std::endl;
-    return os;
-}
 
 #endif /* defined(__Tarea5_BinaryTrees_E4__FamilyMember__) */

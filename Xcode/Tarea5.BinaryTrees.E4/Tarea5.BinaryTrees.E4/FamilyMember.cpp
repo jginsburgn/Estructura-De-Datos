@@ -40,19 +40,60 @@ FamilyMember::FamilyMember(std::string newName, std::string newLastName){
 
 //Adding children
 bool FamilyMember::insertChild(FamilyMember * child){
+    if (gender == GUnknown) {
+        std::cout << "Please set the gender of " << this->getName() << " " << this->getLastName() << std::endl;
+        Helper::print("1 for male.");
+        Helper::print("2 for female.");
+        int input = Helper::read<int>("Enter your choice:");
+        if (input == 1) {
+            gender = GMale;
+        }
+        else if (input == 2){
+            gender = GFemale;
+        }
+        else{
+            Helper::print("Invalid choice.");
+            return this->insertChild(child);
+        }
+    }
     if (gender == GMale) {
-        child->setFather(this);
+        if (child->getFather() == this) {
+        }
+        else {
+            child->setFather(this);
+        }
     }
     else if (gender == GFemale) {
-        child->setMother(this);
+        if (child->getMother() == this) {
+        }
+        else {
+            child->setMother(this);
+        }
     }
     else{
         if (child->getFather()) {
-            child->setMother(this);
+            if (child->getMother() == this) {
+            }
+            else {
+                child->setMother(this);
+            }
         }
-        else child->setFather(this);
+        else {
+            if (child->getFather() == this) {
+            }
+            else {
+                child->setFather(this);
+            }
+        }
     }
-    children->push_back(child);
+    bool alreadyInList = false;
+    for (int i = 0; i < children->size(); ++i) {
+        if ((*children)[i] == child) {
+            alreadyInList = true;
+            break;
+        }
+    }
+    if (!alreadyInList) children->push_back(child);
     return true;
 }
 
@@ -117,7 +158,7 @@ void FamilyMember::showDescendents() const{
     std::cout << "Showing descendents of " << getName() << " " << getLastName() << ":" << std::endl;
     if (children->size() > 0) {
         for (int i = 0; i < children->size(); ++i) {
-            std::cout << "Child number " << Helper::intToString(i) << " of " << getName() << " " << getLastName() << ":" << std::endl;
+            std::cout << "Child number " << Helper::intToString(i+1) << " of " << getName() << " " << getLastName() << ":" << std::endl;
             std::cout << *(*children)[i] << std::endl;
             (*children)[i]->showDescendents();
         }
@@ -207,7 +248,57 @@ void FamilyMember::showGrandchildrenExceptFor(const FamilyMember * thisSonsChild
     }
 }
 
+//Other methods
+bool FamilyMember::isAlive() const{
+    if (this->getLivingStatus() == LSAlive) {
+        return true;
+    }
+    return false;
+}
 
+bool FamilyMember::diedBeforeDate(Date date) const{
+    if (date < this->getDeathday()) {
+        return true;
+    }
+    return false;
+}
+
+std::ostream & operator<<(std::ostream & osd, FamilyMember & fm){
+    osd << "\n" << "---------*****---------" << std::endl;;
+    osd << "Name: " << fm.getName() << std::endl;
+    osd << "Last Name: " << fm.getLastName() << std::endl;
+    if (!fm.getBirthday().isEmpty()) {
+        osd << "Birthday: " << fm.getBirthday() << std::endl;
+    }
+    if (!fm.getDeathday().isEmpty()) {
+        osd << "Deathday: " << fm.getDeathday() << std::endl;
+    }
+    std::string livings = "";
+    if (fm.getLivingStatus() == LSAlive) {
+        livings = "Alive";
+    }
+    else if (fm.getLivingStatus() == LSDeceased){
+        livings = "Deceased";
+    }
+    else if (fm.getLivingStatus() == LSUnknown){
+        livings = "Unknown";
+    }
+    osd << "Living status: " << livings << std::endl;
+    if (fm.getFather()) {
+        osd << "Father's full name: " << fm.getFather()->getName() << " " << fm.getFather()->getLastName() << std::endl;
+    }
+    if (fm.getMother()) {
+        osd << "Mother's full name: " << fm.getMother()->getName() << " " << fm.getMother()->getLastName() << std::endl;
+    }
+    if (fm.getChildren()->size() != 0) {
+        osd << "Children:\n" << "::::::::::::::::::::" << std::endl;
+        for (int i = 0; i < fm.getChildren()->size(); ++i) {
+            osd << "Child number " << i + 1 << "'s full name: " << (*fm.getChildren())[i]->getName() << " " << (*fm.getChildren())[i]->getLastName() << std::endl;
+        }
+        osd << "::::::::::::::::::::" << std::endl;
+    }
+    return osd;
+}
 
 
 

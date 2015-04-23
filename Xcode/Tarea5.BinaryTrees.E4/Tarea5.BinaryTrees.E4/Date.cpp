@@ -19,6 +19,7 @@ bool Date::operator > (const Date & otherDate) const{
     if (otherDate.isEmpty() || this->isEmpty() || otherDate == *this) {
         return false;
     }
+    
     if (year > otherDate.getYear()) {
         return true;
     }
@@ -46,4 +47,9 @@ bool Date::operator < (const Date & otherDate) const{
         return false;
     }
     return true;
+}
+
+std::ostream & operator<<(std::ostream & os, const Date & date){
+    os << Helper::intToString(date.getDay()) << "/" << Helper::intToString(date.getMonth()) << "/" << Helper::intToString(date.getYear());
+    return os;
 }

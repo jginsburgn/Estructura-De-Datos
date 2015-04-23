@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>99F80762-33D9-40AA-AAC5-FAC178EE6310</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Tarea5.BinaryTrees.E4</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>9E87751665FF471B4296D7BED16921BCDE24237E</key>
 		<string>https://github.com/jginsburgn/Estructura-De-Datos.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Xcode/Tarea5.BinaryTrees.E4/Tarea5.BinaryTrees.E4.xcodeproj/project.xcworkspace</string>
+	<string>Xcode/Tarea5.BinaryTrees.E4/Tarea5.BinaryTrees.E4.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>9E87751665FF471B4296D7BED16921BCDE24237E</key>

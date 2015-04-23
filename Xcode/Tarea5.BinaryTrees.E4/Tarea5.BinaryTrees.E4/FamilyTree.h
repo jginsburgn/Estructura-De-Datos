@@ -37,6 +37,11 @@ public:
     std::vector<FamilyMember *> getMembersBasedOnDeathday(Date date) const;
     FamilyMember * lookForMember() const;
     
+    //Showing members
+    void showAllMembers() const;
+    void showAllLivingMembers() const;
+    void showAllMembersThatDiedBefore(Date date) const;
+    
     //Editing member's traits
     void edit(FamilyMember * member);
 };

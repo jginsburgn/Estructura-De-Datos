@@ -9,7 +9,6 @@
 #ifndef __Tarea1_Recursividad__Helper__
 #define __Tarea1_Recursividad__Helper__
 
-#include <stdio.h>
 #include <iostream>
 #include <string>
 #include <sstream>
