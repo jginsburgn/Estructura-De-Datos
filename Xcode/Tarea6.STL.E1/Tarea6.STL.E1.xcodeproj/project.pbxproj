@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FA1EA0151AECCC4B0082F8EC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA1EA0141AECCC4B0082F8EC /* main.cpp */; };
+		FA82CEBD1AEF701C0042B884 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA82CEBC1AEF701C0042B884 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		FA1EA00F1AECCC4A0082F8EC /* CopyFiles */ = {
+		FA82CEB71AEF701C0042B884 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -23,17 +23,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FA1EA0111AECCC4A0082F8EC /* Graphs */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Graphs; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA1EA0141AECCC4B0082F8EC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		FA1EA01B1AECCCE20082F8EC /* Edge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Edge.h; sourceTree = "<group>"; };
-		FA1EA01C1AECCCEA0082F8EC /* Vertex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
-		FA1EA01D1AECCE8C0082F8EC /* Graph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
-		FA2BB3D21AEEB52D002CF3EB /* FileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
-		FA66EF1F1AECE6E50021D875 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		FA82CEB91AEF701C0042B884 /* Tarea6.STL.E1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tarea6.STL.E1; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA82CEBC1AEF701C0042B884 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FA82CEC41AEF703E0042B884 /* Vertex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		FA82CEC51AEF703E0042B884 /* Edge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Edge.h; sourceTree = "<group>"; };
+		FA82CEC61AEF703E0042B884 /* Graph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
+		FA82CEC71AEF703E0042B884 /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		FA1EA00E1AECCC4A0082F8EC /* Frameworks */ = {
+		FA82CEB61AEF701C0042B884 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -43,99 +42,98 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FA1EA0081AECCC4A0082F8EC = {
+		FA82CEB01AEF701C0042B884 = {
 			isa = PBXGroup;
 			children = (
-				FA1EA0131AECCC4A0082F8EC /* Graphs */,
-				FA1EA0121AECCC4A0082F8EC /* Products */,
+				FA82CEBB1AEF701C0042B884 /* Tarea6.STL.E1 */,
+				FA82CEBA1AEF701C0042B884 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		FA1EA0121AECCC4A0082F8EC /* Products */ = {
+		FA82CEBA1AEF701C0042B884 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FA1EA0111AECCC4A0082F8EC /* Graphs */,
+				FA82CEB91AEF701C0042B884 /* Tarea6.STL.E1 */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FA1EA0131AECCC4A0082F8EC /* Graphs */ = {
+		FA82CEBB1AEF701C0042B884 /* Tarea6.STL.E1 */ = {
 			isa = PBXGroup;
 			children = (
-				FA1EA0141AECCC4B0082F8EC /* main.cpp */,
-				FA2BB3D21AEEB52D002CF3EB /* FileManager.h */,
-				FA1EA01C1AECCCEA0082F8EC /* Vertex.h */,
-				FA1EA01B1AECCCE20082F8EC /* Edge.h */,
-				FA1EA01D1AECCE8C0082F8EC /* Graph.h */,
-				FA66EF1F1AECE6E50021D875 /* Helper.h */,
+				FA82CEBC1AEF701C0042B884 /* main.cpp */,
+				FA82CEC41AEF703E0042B884 /* Vertex.h */,
+				FA82CEC51AEF703E0042B884 /* Edge.h */,
+				FA82CEC61AEF703E0042B884 /* Graph.h */,
+				FA82CEC71AEF703E0042B884 /* Helper.h */,
 			);
-			path = Graphs;
+			path = Tarea6.STL.E1;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FA1EA0101AECCC4A0082F8EC /* Graphs */ = {
+		FA82CEB81AEF701C0042B884 /* Tarea6.STL.E1 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FA1EA0181AECCC4B0082F8EC /* Build configuration list for PBXNativeTarget "Graphs" */;
+			buildConfigurationList = FA82CEC01AEF701C0042B884 /* Build configuration list for PBXNativeTarget "Tarea6.STL.E1" */;
 			buildPhases = (
-				FA1EA00D1AECCC4A0082F8EC /* Sources */,
-				FA1EA00E1AECCC4A0082F8EC /* Frameworks */,
-				FA1EA00F1AECCC4A0082F8EC /* CopyFiles */,
+				FA82CEB51AEF701C0042B884 /* Sources */,
+				FA82CEB61AEF701C0042B884 /* Frameworks */,
+				FA82CEB71AEF701C0042B884 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Graphs;
-			productName = Graphs;
-			productReference = FA1EA0111AECCC4A0082F8EC /* Graphs */;
+			name = Tarea6.STL.E1;
+			productName = Tarea6.STL.E1;
+			productReference = FA82CEB91AEF701C0042B884 /* Tarea6.STL.E1 */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		FA1EA0091AECCC4A0082F8EC /* Project object */ = {
+		FA82CEB11AEF701C0042B884 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Jonathan Ginsburg";
 				TargetAttributes = {
-					FA1EA0101AECCC4A0082F8EC = {
+					FA82CEB81AEF701C0042B884 = {
 						CreatedOnToolsVersion = 6.3.1;
 					};
 				};
 			};
-			buildConfigurationList = FA1EA00C1AECCC4A0082F8EC /* Build configuration list for PBXProject "Graphs" */;
+			buildConfigurationList = FA82CEB41AEF701C0042B884 /* Build configuration list for PBXProject "Tarea6.STL.E1" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = FA1EA0081AECCC4A0082F8EC;
-			productRefGroup = FA1EA0121AECCC4A0082F8EC /* Products */;
+			mainGroup = FA82CEB01AEF701C0042B884;
+			productRefGroup = FA82CEBA1AEF701C0042B884 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FA1EA0101AECCC4A0082F8EC /* Graphs */,
+				FA82CEB81AEF701C0042B884 /* Tarea6.STL.E1 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		FA1EA00D1AECCC4A0082F8EC /* Sources */ = {
+		FA82CEB51AEF701C0042B884 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA1EA0151AECCC4B0082F8EC /* main.cpp in Sources */,
+				FA82CEBD1AEF701C0042B884 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		FA1EA0161AECCC4B0082F8EC /* Debug */ = {
+		FA82CEBE1AEF701C0042B884 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -177,7 +175,7 @@
 			};
 			name = Debug;
 		};
-		FA1EA0171AECCC4B0082F8EC /* Release */ = {
+		FA82CEBF1AEF701C0042B884 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -212,14 +210,14 @@
 			};
 			name = Release;
 		};
-		FA1EA0191AECCC4B0082F8EC /* Debug */ = {
+		FA82CEC11AEF701C0042B884 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		FA1EA01A1AECCC4B0082F8EC /* Release */ = {
+		FA82CEC21AEF701C0042B884 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -229,25 +227,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FA1EA00C1AECCC4A0082F8EC /* Build configuration list for PBXProject "Graphs" */ = {
+		FA82CEB41AEF701C0042B884 /* Build configuration list for PBXProject "Tarea6.STL.E1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FA1EA0161AECCC4B0082F8EC /* Debug */,
-				FA1EA0171AECCC4B0082F8EC /* Release */,
+				FA82CEBE1AEF701C0042B884 /* Debug */,
+				FA82CEBF1AEF701C0042B884 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FA1EA0181AECCC4B0082F8EC /* Build configuration list for PBXNativeTarget "Graphs" */ = {
+		FA82CEC01AEF701C0042B884 /* Build configuration list for PBXNativeTarget "Tarea6.STL.E1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FA1EA0191AECCC4B0082F8EC /* Debug */,
-				FA1EA01A1AECCC4B0082F8EC /* Release */,
+				FA82CEC11AEF701C0042B884 /* Debug */,
+				FA82CEC21AEF701C0042B884 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = FA1EA0091AECCC4A0082F8EC /* Project object */;
+	rootObject = FA82CEB11AEF701C0042B884 /* Project object */;
 }

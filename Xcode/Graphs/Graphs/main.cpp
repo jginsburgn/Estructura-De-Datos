@@ -9,8 +9,12 @@
 #include <iostream>
 #include "Graph.h"
 #include "Helper.h"
+#include "FileManager.h"
 
 Graph<std::string, int> a;
+std::vector<std::string> currentSession;
+
+void parse(std::vector<std::string> args);
 
 std::string buildString(std::vector<std::string> args, int low, int high){
     std::string name = "";
@@ -34,7 +38,52 @@ std::string buildString(std::vector<std::string> args, int low){
     return name;
 }
 
-void remove();
+void remove(std::vector<std::string> args){
+    if (args.size() == 1) {
+        Helper::print("Incomplete command.");
+        Helper::print("Type: remove help (for displaying options)");
+    }
+    else if (args[1] == "help") {
+        Helper::print("remove cities (removes all cities and all highways)");
+        Helper::print("remove city [City's name] (removes the indicated city)");
+        Helper::print("remove current_session (shows all cities)");
+        Helper::print("remove road [Road's origin] , [Road's destination] (removes all highways)");
+        Helper::print("remove roads (removes all highways)");
+    }
+    else if (args[1] == "cities"){
+        a.clear();
+    }
+    else if (args[1] == "city"){
+        if (args.size() <= 2) {
+            Helper::print("Missing data. Please type: remove city [City's name]");
+            return;
+        }
+        a.removeVertex(buildString(args, 2));
+    }
+    else if (args[1] == "roads"){
+        a.disconnectAll();
+    }
+    else if (args[1] == "road"){
+        if (args.size() <= 2) {
+            Helper::print("Missing data. Please type: remove road [Road's origin] , [Road's destination]");
+            return;
+        }
+        int comma = -1;
+        
+        for (int i = 2; i < args.size(); ++i) {
+            if (args[i] == ",") {
+                comma = i;
+            }
+        }
+        a.removeEdge(a.getEdge(buildString(args, 2, comma), buildString(args, comma + 1)));
+    }
+    else if (args[1] == "current_session"){
+        Helper::print("Current session history commands:");
+        for (int i = 0; i < currentSession.size(); ++i) {
+            std::cout << "\t" << currentSession[i] << std::endl;
+        }
+    }
+}
 
 void show(std::vector<std::string> args){
     if (args.size() == 1) {
@@ -42,6 +91,7 @@ void show(std::vector<std::string> args){
         Helper::print("Type: show help (for displaying options)");
     }
     else if (args[1] == "help") {
+        Helper::print("current_session (shows all commands in the current session except for save and load)");
         Helper::print("show cities (shows all cities)");
         Helper::print("show roads (shows all highways)");
     }
@@ -57,6 +107,12 @@ void show(std::vector<std::string> args){
             std::cout << "\t" << i+1 << ") " << *(*a.getEdges())[i] << "." << std::endl;
         }
     }
+    else if (args[1] == "current_session"){
+        Helper::print("Current session history commands:");
+        for (int i = 0; i < currentSession.size(); ++i) {
+            std::cout << "\t" << currentSession[i] << std::endl;
+        }
+    }
 }
 
 void add(std::vector<std::string> args){
@@ -65,12 +121,12 @@ void add(std::vector<std::string> args){
         Helper::print("Type: add help (for displaying options)");
     }
     else if (args[1] == "help") {
-        Helper::print("add city (adds a city)");
-        Helper::print("add road (adds a road)");
+        Helper::print("add city [City's name] (adds a city)");
+        Helper::print("add road [Road's longitude] [Road's origin] , [Road's destination] (adds a road)");
     }
     else if (args[1] == "city"){
         if (args.size() == 2) {
-            Helper::print("Missing name of the city. Please type add city [city's name]");
+            Helper::print("Missing name of the city. Please type: add city [City's name]");
             return;
         }
         try {
@@ -81,7 +137,7 @@ void add(std::vector<std::string> args){
     }
     else if (args[1] == "road"){
         if (args.size() <= 2) {
-            Helper::print("Missing data. Please type: add road [road's longitude] [road's origin] , [road's destination]");
+            Helper::print("Missing data. Please type: add road [Road's longitude] [Road's origin] , [Road's destination]");
             return;
         }
         int comma = -1;
@@ -105,9 +161,45 @@ void add(std::vector<std::string> args){
     }
 }
 
+void save(std::vector<std::string> args){
+    if (args.size() == 1) {
+        Helper::print("Incomplete command.");
+        Helper::print("Type: save help (for displaying options)");
+    }
+    else if (args[1] == "help") {
+        Helper::print("save [Session name] (saves current session)");
+    }
+    else{
+        FileManager::saveSession(buildString(args, 1), currentSession);
+    }
+}
+
+void load(std::vector<std::string> args){
+    if (args.size() == 1) {
+        Helper::print("Incomplete command.");
+        Helper::print("Type: load help (for displaying options)");
+    }
+    else if (args[1] == "help") {
+        Helper::print("load [Session name] (deletes current session and loads a new one)");
+    }
+    else{
+        currentSession = FileManager::loadSession(buildString(args, 1));
+        for (int i = 0; i < currentSession.size(); ++i) {
+            std::vector<std::string> NewArgs = Helper::split(currentSession[i], ' ');
+            std::cout << buildString(args, 1) << ">>> " << currentSession[i] << std::endl;
+            parse(NewArgs);
+        }
+    }
+}
+
 void parse(std::vector<std::string> args){
+    
     if (args[0] == "help") {
         Helper::print("add (adds information)");
+        Helper::print("load (loads a session of commands)");
+        Helper::print("quit");
+        Helper::print("remove (removes information)");
+        Helper::print("save (saves current session of commands)");
         Helper::print("show (displays information)");
     }
     else if (args[0] == "show"){
@@ -116,11 +208,25 @@ void parse(std::vector<std::string> args){
     else if (args[0] == "add"){
         add(args);
     }
+    else if (args[0] == "save"){
+        save(args);
+    }
+    else if (args[0] == "load"){
+        load(args);
+    }
+    else if (args[0] == "remove"){
+        remove(args);
+    }
 }
 
 bool prompt(){
     std::string input = Helper::readLine(">>> ");
     std::vector<std::string> args = Helper::split(input, ' ');
+    if (args[0] == "save" || args[0] == "load") {
+        parse(args);
+        return true;
+    }
+    else currentSession.push_back(input);
     if (args[0] == "quit") return false;
     else {
         parse(args);
