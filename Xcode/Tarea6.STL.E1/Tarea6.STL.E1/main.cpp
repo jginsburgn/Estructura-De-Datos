@@ -9,16 +9,19 @@
 #include "Graph.h"
 
 int main(int argc, const char * argv[]) {
-    Graph<std::string, int> graph;
+    Graph<std::string, int> graphA;
     try {
-        graph.addVertex("Jonathan");
-        graph.addVertex("Samuel");
-        graph.addEdge(10, "Jonathan", "Samuel");
-        graph.addEdge(20, "Jonathan", "Samuel");
-        graph.removeVertex("Jonathan");
+        graphA.addVertex("Jonathan");
+        graphA.addVertex("Samuel");
+        graphA.addEdge(10, "Jonathan", "Samuel");
+        graphA.addEdge(20, "Jonathan", "Samuel");
     } catch (const char * exception) {
         std::cout << exception << std::endl;
     }
-    std::cout << graph;
+    Graph<std::string, int> graphB = graphA;
+    graphB.removeVertex("Samuel");
+    std::cout << graphA;
+    std::cout << std::endl;
+    std::cout << graphB;
     return 0;
 }
