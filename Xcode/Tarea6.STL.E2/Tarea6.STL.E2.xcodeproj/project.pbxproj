@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FA82CEBD1AEF701C0042B884 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA82CEBC1AEF701C0042B884 /* main.cpp */; };
+		FAEE15C81AF023420052D6C1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAEE15C71AF023420052D6C1 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		FA82CEB71AEF701C0042B884 /* CopyFiles */ = {
+		FAEE15C21AF023420052D6C1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -23,19 +23,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FA82CEB91AEF701C0042B884 /* Tarea6.STL.E1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tarea6.STL.E1; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA82CEBC1AEF701C0042B884 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		FAD6A7761AF281C400EBDC85 /* Edge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Edge.h; sourceTree = "<group>"; };
-		FAD6A7771AF281C400EBDC85 /* Graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
-		FAD6A7781AF281C400EBDC85 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
-		FAD6A77A1AF282F700EBDC85 /* Container.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Container.h; sourceTree = "<group>"; };
-		FAD6A77B1AF2835B00EBDC85 /* Product.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
-		FAD6A77C1AF292D800EBDC85 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
-		FAD6A77D1AF2934200EBDC85 /* Port.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Port.h; sourceTree = "<group>"; };
+		FA16FF211AF0B3C800DA59F6 /* Student.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		FA16FF221AF1789100DA59F6 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		FAEE15C41AF023420052D6C1 /* Tarea6.STL.E2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tarea6.STL.E2; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAEE15C71AF023420052D6C1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FAEE15CE1AF024790052D6C1 /* Edge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Edge.h; sourceTree = "<group>"; };
+		FAEE15CF1AF024790052D6C1 /* Graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
+		FAEE15D01AF024790052D6C1 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		FA82CEB61AEF701C0042B884 /* Frameworks */ = {
+		FAEE15C11AF023420052D6C1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -45,41 +43,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FA82CEB01AEF701C0042B884 = {
+		FAEE15BB1AF023420052D6C1 = {
 			isa = PBXGroup;
 			children = (
-				FA82CEBB1AEF701C0042B884 /* Tarea6.STL.E1 */,
-				FA82CEBA1AEF701C0042B884 /* Products */,
+				FAEE15C61AF023420052D6C1 /* Tarea6.STL.E2 */,
+				FAEE15C51AF023420052D6C1 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		FA82CEBA1AEF701C0042B884 /* Products */ = {
+		FAEE15C51AF023420052D6C1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FA82CEB91AEF701C0042B884 /* Tarea6.STL.E1 */,
+				FAEE15C41AF023420052D6C1 /* Tarea6.STL.E2 */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FA82CEBB1AEF701C0042B884 /* Tarea6.STL.E1 */ = {
+		FAEE15C61AF023420052D6C1 /* Tarea6.STL.E2 */ = {
 			isa = PBXGroup;
 			children = (
-				FA82CEBC1AEF701C0042B884 /* main.cpp */,
-				FAD6A77D1AF2934200EBDC85 /* Port.h */,
-				FAD6A77A1AF282F700EBDC85 /* Container.h */,
-				FAD6A77B1AF2835B00EBDC85 /* Product.h */,
-				FAD6A77C1AF292D800EBDC85 /* Helper.h */,
-				FAD6A7791AF282ED00EBDC85 /* Graphs */,
+				FAEE15C71AF023420052D6C1 /* main.cpp */,
+				FA16FF221AF1789100DA59F6 /* Helper.h */,
+				FA16FF211AF0B3C800DA59F6 /* Student.h */,
+				FAEE15D11AF024800052D6C1 /* Graphs */,
 			);
-			path = Tarea6.STL.E1;
+			path = Tarea6.STL.E2;
 			sourceTree = "<group>";
 		};
-		FAD6A7791AF282ED00EBDC85 /* Graphs */ = {
+		FAEE15D11AF024800052D6C1 /* Graphs */ = {
 			isa = PBXGroup;
 			children = (
-				FAD6A7761AF281C400EBDC85 /* Edge.h */,
-				FAD6A7771AF281C400EBDC85 /* Graph.h */,
-				FAD6A7781AF281C400EBDC85 /* Vertex.h */,
+				FAEE15CE1AF024790052D6C1 /* Edge.h */,
+				FAEE15CF1AF024790052D6C1 /* Graph.h */,
+				FAEE15D01AF024790052D6C1 /* Vertex.h */,
 			);
 			name = Graphs;
 			sourceTree = "<group>";
@@ -87,67 +83,67 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FA82CEB81AEF701C0042B884 /* Tarea6.STL.E1 */ = {
+		FAEE15C31AF023420052D6C1 /* Tarea6.STL.E2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FA82CEC01AEF701C0042B884 /* Build configuration list for PBXNativeTarget "Tarea6.STL.E1" */;
+			buildConfigurationList = FAEE15CB1AF023420052D6C1 /* Build configuration list for PBXNativeTarget "Tarea6.STL.E2" */;
 			buildPhases = (
-				FA82CEB51AEF701C0042B884 /* Sources */,
-				FA82CEB61AEF701C0042B884 /* Frameworks */,
-				FA82CEB71AEF701C0042B884 /* CopyFiles */,
+				FAEE15C01AF023420052D6C1 /* Sources */,
+				FAEE15C11AF023420052D6C1 /* Frameworks */,
+				FAEE15C21AF023420052D6C1 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Tarea6.STL.E1;
-			productName = Tarea6.STL.E1;
-			productReference = FA82CEB91AEF701C0042B884 /* Tarea6.STL.E1 */;
+			name = Tarea6.STL.E2;
+			productName = Tarea6.STL.E2;
+			productReference = FAEE15C41AF023420052D6C1 /* Tarea6.STL.E2 */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		FA82CEB11AEF701C0042B884 /* Project object */ = {
+		FAEE15BC1AF023420052D6C1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Jonathan Ginsburg";
 				TargetAttributes = {
-					FA82CEB81AEF701C0042B884 = {
+					FAEE15C31AF023420052D6C1 = {
 						CreatedOnToolsVersion = 6.3.1;
 					};
 				};
 			};
-			buildConfigurationList = FA82CEB41AEF701C0042B884 /* Build configuration list for PBXProject "Tarea6.STL.E1" */;
+			buildConfigurationList = FAEE15BF1AF023420052D6C1 /* Build configuration list for PBXProject "Tarea6.STL.E2" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = FA82CEB01AEF701C0042B884;
-			productRefGroup = FA82CEBA1AEF701C0042B884 /* Products */;
+			mainGroup = FAEE15BB1AF023420052D6C1;
+			productRefGroup = FAEE15C51AF023420052D6C1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FA82CEB81AEF701C0042B884 /* Tarea6.STL.E1 */,
+				FAEE15C31AF023420052D6C1 /* Tarea6.STL.E2 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		FA82CEB51AEF701C0042B884 /* Sources */ = {
+		FAEE15C01AF023420052D6C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA82CEBD1AEF701C0042B884 /* main.cpp in Sources */,
+				FAEE15C81AF023420052D6C1 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		FA82CEBE1AEF701C0042B884 /* Debug */ = {
+		FAEE15C91AF023420052D6C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -189,7 +185,7 @@
 			};
 			name = Debug;
 		};
-		FA82CEBF1AEF701C0042B884 /* Release */ = {
+		FAEE15CA1AF023420052D6C1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -224,14 +220,14 @@
 			};
 			name = Release;
 		};
-		FA82CEC11AEF701C0042B884 /* Debug */ = {
+		FAEE15CC1AF023420052D6C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		FA82CEC21AEF701C0042B884 /* Release */ = {
+		FAEE15CD1AF023420052D6C1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -241,25 +237,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FA82CEB41AEF701C0042B884 /* Build configuration list for PBXProject "Tarea6.STL.E1" */ = {
+		FAEE15BF1AF023420052D6C1 /* Build configuration list for PBXProject "Tarea6.STL.E2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FA82CEBE1AEF701C0042B884 /* Debug */,
-				FA82CEBF1AEF701C0042B884 /* Release */,
+				FAEE15C91AF023420052D6C1 /* Debug */,
+				FAEE15CA1AF023420052D6C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FA82CEC01AEF701C0042B884 /* Build configuration list for PBXNativeTarget "Tarea6.STL.E1" */ = {
+		FAEE15CB1AF023420052D6C1 /* Build configuration list for PBXNativeTarget "Tarea6.STL.E2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FA82CEC11AEF701C0042B884 /* Debug */,
-				FA82CEC21AEF701C0042B884 /* Release */,
+				FAEE15CC1AF023420052D6C1 /* Debug */,
+				FAEE15CD1AF023420052D6C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = FA82CEB11AEF701C0042B884 /* Project object */;
+	rootObject = FAEE15BC1AF023420052D6C1 /* Project object */;
 }

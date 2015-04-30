@@ -19,23 +19,9 @@ private:
     std::vector<Vertex<V, E> *> * vertices = new std::vector<Vertex<V, E> *>();
     std::vector<Edge<V, E> *> * edges = new std::vector<Edge<V, E> *>();
     
-    void copy(const Graph<V, E> & source){
-        for (int i = 0; i < source.getVertices()->size(); ++i) {
-            addVertex(*(source.getVertexAt(i)->getInfo()));
-        }
-        for (int i = 0; i < source.getEdges()->size(); ++i) {
-            Edge<V, E> * sourceEdge = source.getEdgeAt(i);
-            addEdge(*sourceEdge->getInfo(), *sourceEdge->getOrigin()->getInfo(), *sourceEdge->getDestination()->getInfo());
-        }
-    }
-    
 public:
     
     Graph() {};
-    
-    Graph(const Graph<V, E> & source) {
-        copy(source);
-    }
     
     ~Graph() {
         for (int i = 0; i < vertices->size(); ++i) {
@@ -52,6 +38,132 @@ public:
         
     }
     
+    void addVertex(V info){
+        for (int i = 0; i < vertices->size(); ++i) {
+            if (info == *((*vertices)[i]->getInfo())) {
+                throw "City already exists...";
+            }
+        }
+        Vertex<V, E> * newVertex = new Vertex<V, E>(info);
+        vertices->push_back(newVertex);
+    }
+    
+    void addEdge(E info, V origin, V destination){
+        for (int i = 0; i < edges->size(); ++i) {
+            if (*((*edges)[i]->getOrigin())->getInfo() == origin) {
+                if (*((*edges)[i]->getDestination())->getInfo() == destination) {
+                    throw "Road already exists...";
+                }
+            }
+        }
+        
+        Vertex<V, E> * originVertex = getVertex(origin);
+        Vertex<V, E> * destinationVertex = getVertex(destination);
+        Edge<V, E> * newEdge = new Edge<V, E>(info, originVertex, destinationVertex);
+        
+        for (int i = 0; i < vertices->size(); ++i) {
+            if (*((*vertices)[i])->getInfo() == origin) {
+                originVertex->connectOutgoingEdge(newEdge);
+            }
+            if (*((*vertices)[i])->getInfo() == destination) {
+                destinationVertex->connectIncomingEdge(newEdge);
+            }
+        }
+        edges->push_back(newEdge);
+    }
+    
+    bool removeVertex(V info){
+        int position = -1;
+        Vertex<V, E> * vertexToDelete = nullptr;
+        for (int i = 0; i < vertices->size(); ++i) {
+            if (info == *((*vertices)[i]->getInfo())) {
+                vertexToDelete = (*vertices)[i];
+                position = i;
+                break;
+            }
+        }
+        if (vertexToDelete) {
+            for (int i = 0; i < vertexToDelete->getEdges()->size() ; ++i) {
+                Edge<V, E> * edgeToDelete = (*vertexToDelete->getEdges())[i];
+                removeEdge(edgeToDelete);
+                delete vertexToDelete;
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    bool removeVertex(Vertex<V, E> * vertexToDelete){
+        int position = -1;
+        for (int i = 0; i < vertices->size(); ++i) {
+            if (*vertexToDelete->getInfo() == *((*vertices)[i]->getInfo())) {
+                position = i;
+                break;
+            }
+        }
+        if (vertexToDelete) {
+            for (int i = 0; i < vertexToDelete->getEdges()->size() ; ++i) {
+                Edge<V, E> * edgeToDelete = (*vertexToDelete->getEdges())[i];
+                if (removeEdge(edgeToDelete)) --i;
+            }
+            vertices->erase(vertices->begin() + position);
+            delete vertexToDelete;
+            return true;
+        }
+        return false;
+    }
+    
+    bool removeEdge(Edge<V, E> * edgeToDelete){
+        int position = -1;
+        for (int i = 0; i < edges->size(); ++i) {
+            if (*((*edges)[i])->getOrigin()->getInfo() == *(edgeToDelete->getOrigin()->getInfo())) {
+                if (*((*edges)[i]->getDestination())->getInfo() == *(edgeToDelete->getDestination()->getInfo())) {
+                    edgeToDelete = (*edges)[i];
+                    position = i;
+                    break;
+                }
+            }
+        }
+        if (edgeToDelete) {
+            if (edgeToDelete->getOrigin()) {
+                edgeToDelete->getOrigin()->disconnectEdge(edgeToDelete);
+            }
+            if (edgeToDelete->getDestination()) {
+                edgeToDelete->getDestination()->disconnectEdge(edgeToDelete);
+            }
+            edges->erase(edges->begin() + position);
+            delete edgeToDelete;
+            return true;
+        }
+        return false;
+    }
+    
+    bool removeEdge(E info, V origin, V destination){
+        int position = -1;
+        Edge<V, E> * edgeToDelete = nullptr;
+        for (int i = 0; i < edges->size(); ++i) {
+            if (*((*edges)[i]->getOrigin())->getInfo() == origin) {
+                if (*((*edges)[i]->getDestination())->getInfo() == destination) {
+                    edgeToDelete = (*edges)[i];
+                    position = i;
+                }
+            }
+        }
+        return removeEdge(edgeToDelete);
+    }
+    
+    void clear(){
+        for (int i = 0; i < vertices->size(); ++i) {
+            if (removeVertex((*vertices)[i])) --i;
+        }
+    }
+    
+    void disconnectAll() {
+        while (edges->size() != 0) {
+            removeEdge((*edges)[0]);
+        }
+    }
+    
     std::vector<Vertex<V, E> *> * getVertices() const{
         return vertices;
     }
@@ -61,23 +173,30 @@ public:
     }
     
     Vertex<V, E> * getVertex(V info) const{
-        Vertex<V, E> compare(info);
+        Vertex<V, E> * returner = nullptr;
         for (int i = 0; i < vertices->size(); ++i) {
-            if (compare == *getVertexAt(i)) {
-                return getVertexAt(i);
+            if (info == *(*vertices)[i]->getInfo()) {
+                returner = (*vertices)[i];
+                break;
             }
         }
-        throw "Vertex does not exist...";
+        if (!returner) {
+            throw "No city with that name...";
+        }
+        return returner;
     }
     
-    Edge<V, E> * getEdge(E info, V origin, V destination) const{
-        Edge<V, E> compare(info, getVertex(origin), getVertex(destination));
+    Edge<V, E> * getEdge(V origin, V destination) const{
+        Edge<V, E> * returner = nullptr;
         for (int i = 0; i < edges->size(); ++i) {
-            if (compare == *getEdgeAt(i)) {
-                return getEdgeAt(i);
+            if (origin == *(*edges)[i]->getOrigin()->getInfo() && destination == *(*edges)[i]->getDestination()->getInfo()) {
+                returner = (*edges)[i];
             }
         }
-        throw "Edge does not exist...";
+        if (!returner) {
+            throw "No road found...";
+        }
+        return returner;
     }
     
     Vertex<V, E> * getVertexAt(int i) const{
@@ -86,131 +205,6 @@ public:
     
     Edge<V, E> * getEdgeAt(int i) const{
         return (*edges)[i];
-    }
-    
-    bool vertexExists(V info) const {
-        Vertex<V, E> compare(info);
-        for (int i = 0; i < vertices->size(); ++i) {
-            if (compare == *getVertexAt(i)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    bool edgeExists(E info, V origin, V destination) const {
-        try {
-            Edge<V, E> compare(info, getVertex(origin), getVertex(destination));
-            for (int i = 0; i < edges->size(); ++i) {
-                if (compare == *getEdgeAt(i)) {
-                    return true;
-                }
-            }
-            return false;
-        } catch (const char * exception) {
-            throw exception;
-        }
-    }
-    
-    void addVertex(V info){
-        if (vertexExists(info)) throw "Vertex already exists...";
-        Vertex<V, E> * newVertex = new Vertex<V, E>(info);
-        vertices->push_back(newVertex);
-    }
-    
-    void addEdge(E info, V origin, V destination){
-        
-        if (edgeExists(info, origin, destination)) throw "Edge already exists...";
-        
-        try {
-            Vertex<V, E> * originVertex = getVertex(origin);
-            Vertex<V, E> * destinationVertex = getVertex(destination);
-            Edge<V, E> * newEdge = new Edge<V, E>(info, originVertex, destinationVertex);
-            originVertex->connectOutgoingEdge(newEdge);
-            destinationVertex->connectIncomingEdge(newEdge);
-            edges->push_back(newEdge);
-        } catch (const char * exception) {
-            throw exception;
-        }
-    }
-    
-    void removeVertex(V info){
-        try {
-            removeVertex(getVertex(info));
-        } catch (const char * exception) {
-            throw exception;
-        }
-    }
-    
-    void removeVertex(Vertex<V, E> * vertexToDelete){
-        if (vertexToDelete) {
-            int position = -1;
-            for (int i = 0; i < vertices->size(); ++i) {
-                if (vertexToDelete == getVertexAt(i)) {
-                    position = i;
-                    break;
-                }
-            }
-            if (position == -1) {
-                throw "Vertex not in graph...";
-            }
-            while (0 != vertexToDelete->getEdges()->size()) {
-                Edge<V, E> * edgeToDelete = (*vertexToDelete->getEdges())[0];
-                removeEdge(edgeToDelete);
-            }
-            vertices->erase(vertices->begin() + position);
-            delete vertexToDelete;
-        }
-        else throw "No vertex to remove...(null)";
-    }
-    
-    void removeEdge(E info, V origin, V destination){
-        try {
-            removeEdge(getEdge(info, origin, destination));
-        } catch (const char * exception) {
-            throw exception;
-        }
-    }
-    
-    void removeEdge(Edge<V, E> * edgeToDelete){
-        if (edgeToDelete) {
-            int position = -1;
-            for (int i = 0; i < edges->size(); ++i) {
-                if (*getEdgeAt(i) == *edgeToDelete) {
-                    position = i;
-                    break;
-                }
-            }
-            if (position == -1) {
-                throw "Edge not in graph...";
-            }
-            if (edgeToDelete->getOrigin()) {
-                edgeToDelete->getOrigin()->disconnectEdge(edgeToDelete);
-            }
-            if (edgeToDelete->getDestination()) {
-                edgeToDelete->getDestination()->disconnectEdge(edgeToDelete);
-            }
-            edges->erase(edges->begin() + position);
-            delete edgeToDelete;
-        }
-        else throw "No edge to remove...(null)";
-    }
-    
-    void clear(){
-        while (0 != vertices->size()) {
-            removeVertex(getVertexAt(0));
-        }
-    }
-    
-    void disconnectAll() {
-        while (edges->size() != 0) {
-            removeEdge(getEdgeAt(0));
-        }
-    }
-    
-    Graph<V, E> & operator = (const Graph<V, E> & source){
-        copy(source);
-        return *this;
     }
     
     friend std::ostream & operator << (std::ostream & os, const Graph<V, E> & graph){

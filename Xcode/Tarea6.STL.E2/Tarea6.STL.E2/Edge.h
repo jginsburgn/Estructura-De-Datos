@@ -20,9 +20,19 @@ private:
     Vertex<V, E> * origin = nullptr;
     Vertex<V, E> * destination = nullptr;
     
+    void copy(const Edge<V, E> & source){
+        *info = *source.getInfo();
+        origin = source.getOrigin();
+        destination = source.getDestination();
+    }
+    
 public:
     
     Edge() {};
+    
+    Edge(const Edge<V, E> & source){
+        copy(source);
+    }
     
     Edge(E newInfo){
         setInfo(newInfo);
@@ -40,6 +50,12 @@ public:
     }
     
     ~Edge() {
+        if (origin) {
+            origin->disconnectEdge(this);
+        }
+        if (destination) {
+            destination->disconnectEdge(this);
+        }
         delete info;
     }
     
@@ -60,21 +76,34 @@ public:
     }
     
     void setDestination(Vertex<V, E> * newDestination){
-        if (destination && !newDestination) {
-            destination->disconnectEdge(this);
+        if (destination != newDestination) {
+            if (destination) {
+                destination->disconnectEdge(this);
+            }
+            destination = newDestination;
         }
-        destination = newDestination;
     }
     
     void setOrigin(Vertex<V, E> * newOrigin){
-        if (origin && !origin) {
-            origin->disconnectEdge(this);
+        if (origin != newOrigin) {
+            if (origin) {
+                origin->disconnectEdge(this);
+            }
+            origin = newOrigin;
         }
-        origin = newOrigin;
+    }
+    
+    Edge<V, E> & operator = (const Edge<V, E> & source){
+        copy(source);
+        return *this;
+    }
+    
+    bool operator == (Edge<V, E> & edge) const {
+        return *origin == *edge.getOrigin() && *destination == *edge.getDestination() && *info == *edge.getInfo();
     }
     
     friend std::ostream & operator << (std::ostream & os, const Edge<V, E> & edge){
-        os << "Road's longitude: " << *edge.getInfo() << "; connecting: ";
+        os << "Edge's info: " << *edge.getInfo() << "; connecting: ";
         if (edge.getOrigin()) os << *edge.getOrigin();
         else os << "(NULL)";
         os << " --> ";
@@ -82,7 +111,6 @@ public:
         else os << "(NULL)";
         return os;
     }
-    
 };
 
 #endif
