@@ -17,8 +17,8 @@ class City {
 private:
     
     std::string name =  "No name";
-    float latitude =  0;
-    float longitude = 0;
+    long double latitude =  0;
+    long double longitude = 0;
     bool coordinatesSet = false;
     
 public:
@@ -27,7 +27,7 @@ public:
     City(std::string newName){
         setName(newName);
     }
-    City(std::string newName, float newLatitude, float newLongitude){
+    City(std::string newName, long double newLatitude, long double newLongitude){
         setName(newName);
         setCoordinates(newLatitude, newLongitude);
     }
@@ -36,14 +36,14 @@ public:
         return name;
     }
     
-    float getLatitude() const {
+    long double getLatitude() const {
         if (coordinatesSet) {
             return latitude;
         }
         throw "Coordinates of city are not set...";
     }
     
-    float getLongitude() const {
+    long double getLongitude() const {
         if (coordinatesSet) {
             return longitude;
         }
@@ -54,7 +54,7 @@ public:
         name = newName;
     }
     
-    void setCoordinates(float newLatitude, float newLongitude){
+    void setCoordinates(long double newLatitude, long double newLongitude){
         coordinatesSet = true;
         latitude = newLatitude;
         longitude = newLongitude;
@@ -68,7 +68,7 @@ public:
     friend std::ostream & operator << (std::ostream & os, const City & city){
         os << city.getName();
         try {
-            os << " (Lat: " << city.getLatitude() << ", Lon: " << city.getLongitude() << ")";
+            os << " (Lat: " << std::to_string(city.getLatitude()) << ", Lon: " << std::to_string(city.getLongitude()) << ")";
         } catch (const char * exception) {
             os << ". Unknown position";
         }

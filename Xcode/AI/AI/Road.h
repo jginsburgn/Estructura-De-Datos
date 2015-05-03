@@ -17,12 +17,12 @@ class Road{
     
 private:
     
-    float length = 0;
+    long double length = 0;
     
 public:
     
     Road() {}
-    Road(float newLength) {
+    Road(long double newLength) {
         setLength(newLength);
     }
     Road(City & origin, City & destination){
@@ -33,11 +33,11 @@ public:
         }
     }
     
-    float getLength() const {
+    long double getLength() const {
         return length;
     }
     
-    void setLength(float newLength){
+    void setLength(long double newLength){
         length = newLength;
     }
     

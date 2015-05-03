@@ -102,6 +102,10 @@ public:
         return *origin == *edge.getOrigin() && *destination == *edge.getDestination() && *info == *edge.getInfo();
     }
     
+    bool operator != (Edge<V, E> & edge) const {
+        return !(*this == edge);
+    }
+    
     friend std::ostream & operator << (std::ostream & os, const Edge<V, E> & edge){
         os << "Road's length: " << *edge.getInfo() << "; Connecting: ";
         if (edge.getOrigin()) os << *edge.getOrigin();

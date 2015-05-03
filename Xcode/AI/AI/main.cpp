@@ -151,7 +151,7 @@ void add(std::vector<std::string> args){
             std::string nameOfCity = buildString(args, 2, comma - 1);
             std::string latitude = buildString(args, comma - 1, comma);
             std::string longitude = buildString(args, comma + 1, comma + 2);
-            map.addVertex({nameOfCity, Helper::stringToFloat(latitude), Helper::stringToFloat(longitude)});
+            map.addVertex({nameOfCity, Helper::stringToLongDouble(latitude), Helper::stringToLongDouble(longitude)});
         }
         catch (const char * exception)
         {
@@ -218,6 +218,8 @@ void search(std::vector<std::string> args){
     else if (args[1] == "help") {
         Helper::print("search bf [Origin city] , [Destination city] (looks for a path between cities using breadth first search)");
         Helper::print("search bfv [Origin city] , [Destination city] (looks for a path between cities using breadth first search verbose mode)");
+        Helper::print("search df [Origin city] , [Destination city] (looks for a path between cities using depth first search)");
+        Helper::print("search dfv [Origin city] , [Destination city] (looks for a path between cities using depth first search verbose mode)");
     }
     else if (args[1] == "bf"){
         if (args.size() <= 2) {
@@ -236,6 +238,48 @@ void search(std::vector<std::string> args){
             Vertex<City, Road> * origin = map.getVertex(buildString(args, 2, comma));
             Vertex<City, Road> * destination = map.getVertex(buildString(args, comma + 1));
             AI::breadthFirstSearch(origin, destination, false);
+        } catch (const char * exception) {
+            Helper::print(exception);
+        }
+    }
+    else if (args[1] == "dfv"){
+        if (args.size() <= 2) {
+            Helper::print("Missing data. Please type: search bfv [Origin city] , [Destination city]");
+            return;
+        }
+        
+        int comma = -1;
+        
+        for (int i = 2; i < args.size(); ++i) {
+            if (args[i] == ",") {
+                comma = i;
+            }
+        }
+        try {
+            Vertex<City, Road> * origin = map.getVertex(buildString(args, 2, comma));
+            Vertex<City, Road> * destination = map.getVertex(buildString(args, comma + 1));
+            AI::depthFirstSearch(origin, destination, true);
+        } catch (const char * exception) {
+            Helper::print(exception);
+        }
+    }
+    else if (args[1] == "df"){
+        if (args.size() <= 2) {
+            Helper::print("Missing data. Please type: search bf [Origin city] , [Destination city]");
+            return;
+        }
+        
+        int comma = -1;
+        
+        for (int i = 2; i < args.size(); ++i) {
+            if (args[i] == ",") {
+                comma = i;
+            }
+        }
+        try {
+            Vertex<City, Road> * origin = map.getVertex(buildString(args, 2, comma));
+            Vertex<City, Road> * destination = map.getVertex(buildString(args, comma + 1));
+            AI::depthFirstSearch(origin, destination, false);
         } catch (const char * exception) {
             Helper::print(exception);
         }

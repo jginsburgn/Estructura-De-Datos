@@ -26,6 +26,10 @@ public:
     
     Path() {}
     
+    std::vector<Edge<City, Road> *> getSteps() const{
+        return path;
+    }
+    
     void addStep(Edge<City, Road> * newStep){
         path.push_back(newStep);
     }

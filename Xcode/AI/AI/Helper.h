@@ -17,10 +17,10 @@
 class Helper {
 public:
     
-    static float stringToFloat(std::string value){
-        float path =  0;
+    static long double stringToLongDouble(std::string value){
+        long double retVal =  0;
         try {
-            path = std::stof(value);
+            retVal = std::stold(value);
         } catch (const std::out_of_range& invalido) {
             std::string description = "Number out of possible range...(";
             description.append(value);
@@ -32,7 +32,25 @@ public:
             description.append(")");
             throw description.c_str();
         }
-        return path;
+        return retVal;
+    }
+    
+    static float stringToFloat(std::string value){
+        float retVal =  0;
+        try {
+            retVal = std::stof(value);
+        } catch (const std::out_of_range& invalido) {
+            std::string description = "Number out of possible range...(";
+            description.append(value);
+            description.append(")");
+            throw description.c_str();
+        } catch (const std::invalid_argument& ia) {
+            std::string description = "Argument is not a number...(";
+            description.append(value);
+            description.append(")");
+            throw description.c_str();
+        }
+        return retVal;
     }
     
     static bool stringIsNumber(const std::string& s)
