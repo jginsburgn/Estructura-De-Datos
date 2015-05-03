@@ -13,20 +13,27 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <vector>
 
 class Helper {
 public:
     
-    static float StringToFloat(std::string value){
+    static float stringToFloat(std::string value){
+        float path =  0;
         try {
-            float path = std::stof(value);
-            std::cout << path;
+            path = std::stof(value);
         } catch (const std::out_of_range& invalido) {
-            std::cout << "It is not a valid number. " << '\n';
+            std::string description = "Number out of possible range...(";
+            description.append(value);
+            description.append(")");
+            throw description.c_str();
         } catch (const std::invalid_argument& ia) {
-            std::cout << "Invalid argument. " << '\n';
+            std::string description = "Argument is not a number...(";
+            description.append(value);
+            description.append(")");
+            throw description.c_str();
         }
-        return 0;
+        return path;
     }
     
     static bool stringIsNumber(const std::string& s)
@@ -44,7 +51,6 @@ public:
         }
         return elems;
     }
-    
     
     static std::vector<std::string> split(const std::string &s, char delim) {
         std::vector<std::string> elems;

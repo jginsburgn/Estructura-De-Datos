@@ -1,0 +1,55 @@
+//
+//  Road.h
+//  AI
+//
+//  Created by Jonathan Ginsburg on 5/2/15.
+//  Copyright (c) 2015 Jonathan Ginsburg. All rights reserved.
+//
+
+#ifndef AI_Road_h
+#define AI_Road_h
+
+#include <iostream>
+#include <cmath>
+#include "City.h"
+
+class Road{
+    
+private:
+    
+    float length = 0;
+    
+public:
+    
+    Road() {}
+    Road(float newLength) {
+        setLength(newLength);
+    }
+    Road(City & origin, City & destination){
+        try {
+            setLength(sqrtf(powf(origin.getLatitude()-destination.getLatitude(), 2)+pow(origin.getLongitude()-destination.getLongitude(), 2)));
+        } catch (const char * exception) {
+            throw exception;
+        }
+    }
+    
+    float getLength() const {
+        return length;
+    }
+    
+    void setLength(float newLength){
+        length = newLength;
+    }
+    
+    bool operator == (const Road & road) const {
+        return getLength() == road.getLength();
+    }
+    
+    friend std::ostream & operator << (std::ostream & os, const Road & road){
+        os << road.getLength();
+        return os;
+    }
+    
+};
+
+#endif
