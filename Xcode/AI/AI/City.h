@@ -11,6 +11,7 @@
 
 #include <string>
 #include <iostream>
+#include <cmath>
 
 class City {
     
@@ -62,6 +63,16 @@ public:
     
     bool operator == (const City & city) const {
         bool retVal = getName() == city.getName();
+        return retVal;
+    }
+    
+    long double operator - (const City & city) const {
+        long double retVal = 0;
+        try {
+            retVal = sqrtf(powf(getLatitude()-city.getLatitude(), 2)+pow(getLongitude()-city.getLongitude(), 2));
+        } catch (const char * exception) {
+            throw exception;
+        }
         return retVal;
     }
     

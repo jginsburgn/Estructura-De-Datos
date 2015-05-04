@@ -9,6 +9,7 @@
 #include "City.h"
 #include "Road.h"
 #include <iostream>
+#include <time.h>
 #include "Graph.h"
 #include "Helper.h"
 #include "FileManager.h"
@@ -220,6 +221,8 @@ void search(std::vector<std::string> args){
         Helper::print("search bfv [Origin city] , [Destination city] (looks for a path between cities using breadth first search verbose mode)");
         Helper::print("search df [Origin city] , [Destination city] (looks for a path between cities using depth first search)");
         Helper::print("search dfv [Origin city] , [Destination city] (looks for a path between cities using depth first search verbose mode)");
+        Helper::print("search h [Origin city] , [Destination city] (looks for a path between cities using heuristic or informed search)");
+        Helper::print("search hv [Origin city] , [Destination city] (looks for a path between cities using heuristic or informed search verbose mode)");
     }
     else if (args[1] == "bf"){
         if (args.size() <= 2) {
@@ -237,7 +240,35 @@ void search(std::vector<std::string> args){
         try {
             Vertex<City, Road> * origin = map.getVertex(buildString(args, 2, comma));
             Vertex<City, Road> * destination = map.getVertex(buildString(args, comma + 1));
+            time_t begin = time(0);   // get time now
             AI::breadthFirstSearch(origin, destination, false);
+            time_t finish = time(0);   // get time now
+            std::cout << "Seconds taken for search: " << std::to_string(difftime(begin, finish)) << "." << std::endl;
+            
+        } catch (const char * exception) {
+            Helper::print(exception);
+        }
+    }
+    else if (args[1] == "bfv"){
+        if (args.size() <= 2) {
+            Helper::print("Missing data. Please type: search bfv [Origin city] , [Destination city]");
+            return;
+        }
+        
+        int comma = -1;
+        
+        for (int i = 2; i < args.size(); ++i) {
+            if (args[i] == ",") {
+                comma = i;
+            }
+        }
+        try {
+            Vertex<City, Road> * origin = map.getVertex(buildString(args, 2, comma));
+            Vertex<City, Road> * destination = map.getVertex(buildString(args, comma + 1));
+            time_t begin = time(0);   // get time now
+            AI::breadthFirstSearch(origin, destination, true);
+            time_t finish = time(0);   // get time now
+            std::cout << "Seconds taken for search: " << std::to_string(difftime(begin, finish)) << "." << std::endl;
         } catch (const char * exception) {
             Helper::print(exception);
         }
@@ -284,9 +315,9 @@ void search(std::vector<std::string> args){
             Helper::print(exception);
         }
     }
-    else if (args[1] == "bfv"){
+    else if (args[1] == "h"){
         if (args.size() <= 2) {
-            Helper::print("Missing data. Please type: search bfv [Origin city] , [Destination city]");
+            Helper::print("Missing data. Please type: search h [Origin city] , [Destination city]");
             return;
         }
         
@@ -300,7 +331,48 @@ void search(std::vector<std::string> args){
         try {
             Vertex<City, Road> * origin = map.getVertex(buildString(args, 2, comma));
             Vertex<City, Road> * destination = map.getVertex(buildString(args, comma + 1));
-            AI::breadthFirstSearch(origin, destination, true);
+            AI::heuristicSearch(origin, destination, [](std::vector<SearchNode<Vertex<City, Road>>> & frontier, Vertex<City, Road> & destination)->SearchNode<Vertex<City, Road>>{
+                int priorityPosition = 0;
+                for (int i = 0; i < frontier.size(); ++i) {
+                    if (*frontier[i].getState()->getInfo() - *destination.getInfo() < *frontier[priorityPosition].getState()->getInfo() - *destination.getInfo()) {
+                        priorityPosition =  i;
+                    }
+                }
+                SearchNode<Vertex<City, Road>> retVal = frontier[priorityPosition];
+                frontier.erase(frontier.begin() + priorityPosition);
+                return retVal;
+            }, false);
+        } catch (const char * exception) {
+            Helper::print(exception);
+        }
+    }
+    else if (args[1] == "hv"){
+        if (args.size() <= 2) {
+            Helper::print("Missing data. Please type: search h [Origin city] , [Destination city]");
+            return;
+        }
+        
+        int comma = -1;
+        
+        for (int i = 2; i < args.size(); ++i) {
+            if (args[i] == ",") {
+                comma = i;
+            }
+        }
+        try {
+            Vertex<City, Road> * origin = map.getVertex(buildString(args, 2, comma));
+            Vertex<City, Road> * destination = map.getVertex(buildString(args, comma + 1));
+            AI::heuristicSearch(origin, destination, [](std::vector<SearchNode<Vertex<City, Road>>> & frontier, Vertex<City, Road> & destination)->SearchNode<Vertex<City, Road>>{
+                int priorityPosition = 0;
+                for (int i = 0; i < frontier.size(); ++i) {
+                    if (*frontier[i].getState()->getInfo() - *destination.getInfo() < *frontier[priorityPosition].getState()->getInfo() - *destination.getInfo()) {
+                        priorityPosition =  i;
+                    }
+                }
+                SearchNode<Vertex<City, Road>> retVal = frontier[priorityPosition];
+                frontier.erase(frontier.begin() + priorityPosition);
+                return retVal;
+            }, true);
         } catch (const char * exception) {
             Helper::print(exception);
         }

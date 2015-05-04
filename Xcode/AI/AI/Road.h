@@ -10,7 +10,6 @@
 #define AI_Road_h
 
 #include <iostream>
-#include <cmath>
 #include "City.h"
 
 class Road{
@@ -27,7 +26,7 @@ public:
     }
     Road(City & origin, City & destination){
         try {
-            setLength(sqrtf(powf(origin.getLatitude()-destination.getLatitude(), 2)+pow(origin.getLongitude()-destination.getLongitude(), 2)));
+            setLength(origin-destination);
         } catch (const char * exception) {
             throw exception;
         }
