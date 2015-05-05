@@ -9,6 +9,7 @@
 #include "City.h"
 #include "Road.h"
 #include <iostream>
+#include <unistd.h>
 #include <time.h>
 #include "Graph.h"
 #include "Helper.h"
@@ -129,6 +130,7 @@ void add(std::vector<std::string> args){
     else if (args[1] == "help") {
         Helper::print("add city [City's name] [City's Latitude] , [City's Longitude] (adds a city)");
         Helper::print("add road [Road's length] [Road's origin] , [Road's destination] (adds a road)");
+        Helper::print("add roadsym [Road's length] [Road's origin] , [Road's destination] (adds roads from origin to destination and from destination to origin)");
     }
     else if (args[1] == "city"){
         if (args.size() == 2) {
@@ -177,6 +179,35 @@ void add(std::vector<std::string> args){
         } catch (const char * exception) {
             Helper::print(exception);
         }
+    }
+    else if (args[1] == "roadsym"){
+        if (args.size() <= 2) {
+            Helper::print("Missing data. Please type: add road [Road's origin] , [Road's destination]");
+            return;
+        }
+        
+        int comma = -1;
+        
+        for (int i = 2; i < args.size(); ++i) {
+            if (args[i] == ",") {
+                comma = i;
+            }
+        }
+        std::string exceptionMessage = "";
+        try {
+            map.addEdge({*map.getVertex(buildString(args, 2, comma))->getInfo(), *map.getVertex(buildString(args, comma + 1))->getInfo()}, *map.getVertex(buildString(args, 2, comma))->getInfo(), *map.getVertex(buildString(args, comma + 1))->getInfo());
+        } catch (const char * exception) {
+            exceptionMessage = exception;
+        }
+        if (exceptionMessage != "") {
+            exceptionMessage = "true";
+        }
+        try {
+            map.addEdge({*map.getVertex(buildString(args, 2, comma))->getInfo(), *map.getVertex(buildString(args, comma + 1))->getInfo()}, *map.getVertex(buildString(args, comma + 1))->getInfo(), *map.getVertex(buildString(args, 2, comma))->getInfo());
+        } catch (const char * exception) {
+            exceptionMessage = exception;
+        }
+        if (exceptionMessage == "true" || exceptionMessage == "Vertex already exists...") Helper::print("At least one vertex already existed...");
     }
 }
 
@@ -240,10 +271,10 @@ void search(std::vector<std::string> args){
         try {
             Vertex<City, Road> * origin = map.getVertex(buildString(args, 2, comma));
             Vertex<City, Road> * destination = map.getVertex(buildString(args, comma + 1));
-            time_t begin = time(0);   // get time now
+            auto begin = std::chrono::high_resolution_clock::now();
             AI::breadthFirstSearch(origin, destination, false);
-            time_t finish = time(0);   // get time now
-            std::cout << "Seconds taken for search: " << std::to_string(difftime(begin, finish)) << "." << std::endl;
+            auto end = std::chrono::high_resolution_clock::now();
+            std::cout << "The search took: " << std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count() << " nanoseconds (s * 10 ^ - 9)" << std::endl;
             
         } catch (const char * exception) {
             Helper::print(exception);
@@ -265,10 +296,10 @@ void search(std::vector<std::string> args){
         try {
             Vertex<City, Road> * origin = map.getVertex(buildString(args, 2, comma));
             Vertex<City, Road> * destination = map.getVertex(buildString(args, comma + 1));
-            time_t begin = time(0);   // get time now
+            auto begin = std::chrono::high_resolution_clock::now();
             AI::breadthFirstSearch(origin, destination, true);
-            time_t finish = time(0);   // get time now
-            std::cout << "Seconds taken for search: " << std::to_string(difftime(begin, finish)) << "." << std::endl;
+            auto end = std::chrono::high_resolution_clock::now();
+            std::cout << "The search took: " << std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count() << " nanoseconds (s * 10 ^ - 9)" << std::endl;
         } catch (const char * exception) {
             Helper::print(exception);
         }
@@ -289,7 +320,10 @@ void search(std::vector<std::string> args){
         try {
             Vertex<City, Road> * origin = map.getVertex(buildString(args, 2, comma));
             Vertex<City, Road> * destination = map.getVertex(buildString(args, comma + 1));
+            auto begin = std::chrono::high_resolution_clock::now();
             AI::depthFirstSearch(origin, destination, true);
+            auto end = std::chrono::high_resolution_clock::now();
+            std::cout << "The search took: " << std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count() << " nanoseconds (s * 10 ^ - 9)" << std::endl;
         } catch (const char * exception) {
             Helper::print(exception);
         }
@@ -310,7 +344,10 @@ void search(std::vector<std::string> args){
         try {
             Vertex<City, Road> * origin = map.getVertex(buildString(args, 2, comma));
             Vertex<City, Road> * destination = map.getVertex(buildString(args, comma + 1));
+            auto begin = std::chrono::high_resolution_clock::now();
             AI::depthFirstSearch(origin, destination, false);
+            auto end = std::chrono::high_resolution_clock::now();
+            std::cout << "The search took: " << std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count() << " nanoseconds (s * 10 ^ - 9)" << std::endl;
         } catch (const char * exception) {
             Helper::print(exception);
         }
@@ -331,6 +368,8 @@ void search(std::vector<std::string> args){
         try {
             Vertex<City, Road> * origin = map.getVertex(buildString(args, 2, comma));
             Vertex<City, Road> * destination = map.getVertex(buildString(args, comma + 1));
+            
+            auto begin = std::chrono::high_resolution_clock::now();
             AI::heuristicSearch(origin, destination, [](std::vector<SearchNode<Vertex<City, Road>>> & frontier, Vertex<City, Road> & destination)->SearchNode<Vertex<City, Road>>{
                 int priorityPosition = 0;
                 for (int i = 0; i < frontier.size(); ++i) {
@@ -342,6 +381,9 @@ void search(std::vector<std::string> args){
                 frontier.erase(frontier.begin() + priorityPosition);
                 return retVal;
             }, false);
+            auto end = std::chrono::high_resolution_clock::now();
+            std::cout << "The search took: " << std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count() << " nanoseconds (s * 10 ^ - 9)" << std::endl;
+            
         } catch (const char * exception) {
             Helper::print(exception);
         }
@@ -362,6 +404,7 @@ void search(std::vector<std::string> args){
         try {
             Vertex<City, Road> * origin = map.getVertex(buildString(args, 2, comma));
             Vertex<City, Road> * destination = map.getVertex(buildString(args, comma + 1));
+            auto begin = std::chrono::high_resolution_clock::now();
             AI::heuristicSearch(origin, destination, [](std::vector<SearchNode<Vertex<City, Road>>> & frontier, Vertex<City, Road> & destination)->SearchNode<Vertex<City, Road>>{
                 int priorityPosition = 0;
                 for (int i = 0; i < frontier.size(); ++i) {
@@ -373,6 +416,8 @@ void search(std::vector<std::string> args){
                 frontier.erase(frontier.begin() + priorityPosition);
                 return retVal;
             }, true);
+            auto end = std::chrono::high_resolution_clock::now();
+            std::cout << "The search took: " << std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count() << " nanoseconds (s * 10 ^ - 9)" << std::endl;
         } catch (const char * exception) {
             Helper::print(exception);
         }
@@ -384,7 +429,12 @@ void connectAll(){
         Vertex<City, Road> * currentVertex = (*map.getVertices())[i];
         for (int j = 0; j < map.getVertices()->size(); ++j) {
             if (j == i) continue;
-            map.addEdge({*currentVertex->getInfo(), *(*map.getVertices())[j]->getInfo()}, *currentVertex->getInfo(), *(*map.getVertices())[j]->getInfo());
+            try {
+                map.addEdge({*currentVertex->getInfo(), *(*map.getVertices())[j]->getInfo()}, *currentVertex->getInfo(), *(*map.getVertices())[j]->getInfo());
+            } catch (const char * exception) {
+                std::cout << exception << std::endl;
+            }
+            
         }
     }
 }

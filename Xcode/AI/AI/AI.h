@@ -100,15 +100,6 @@ class AI {
         return false;
     }
     
-//    static bool isInVector(std::vector<SearchNode<Vertex<City, Road>>> vector, SearchNode<Vertex<City, Road>> city){
-//        for (int i = 0; i < vector.size(); ++i) {
-//            if (vector.at(i) == city) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-    
     static bool isInQueue(std::queue<SearchNode<Vertex<City, Road>>> queue, Vertex<City, Road> city){
         while (!queue.empty()){
             Vertex<City, Road> cityToCompare = *queue.front().getState();
@@ -144,6 +135,9 @@ class AI {
                 newSearchNode.addStep(currentEdge);
                 newSearchNode.setCost(nodeToExplore.getCost() + currentEdge->getInfo()->getLength());
                 if (!(isInVector(exploredVertices, *newState) || isInQueue(frontier, *newState) || *newState == *nodeToExplore.getState())) {
+                    if (*newSearchNode.getState() == destination) {
+                        throw newSearchNode;
+                    }
                     frontier.push(newSearchNode);
                 }
             }
@@ -164,6 +158,9 @@ class AI {
                 newSearchNode.addStep(currentEdge);
                 newSearchNode.setCost(nodeToExplore.getCost() + currentEdge->getInfo()->getLength());
                 if (!(isInVector(exploredVertices, *newState) || isInStack(frontier, *newState) || *newState == *nodeToExplore.getState())) {
+                    if (*newSearchNode.getState() == destination) {
+                        throw newSearchNode;
+                    }
                     frontier.push(newSearchNode);
                 }
             }
@@ -184,6 +181,9 @@ class AI {
                 newSearchNode.addStep(currentEdge);
                 newSearchNode.setCost(nodeToExplore.getCost() + currentEdge->getInfo()->getLength());
                 if (!(isInVector(exploredVertices, *newState) || isInVector(frontier, newSearchNode) || *newState == *nodeToExplore.getState())) {
+                    if (*newSearchNode.getState() == destination) {
+                        throw newSearchNode;
+                    }
                     frontier.push_back(newSearchNode);
                 }
             }
@@ -203,8 +203,13 @@ public:
             if (verbose) std::cout << "Discovering city " << *nodeToExplore.getState()->getInfo() << std::endl;
             exploredVertices.push_back(nodeToExplore.getState());
             frontier.pop();
-            if (exploreBreadthFirstSearchNode(nodeToExplore, frontier, exploredVertices, *destination, verbose)){
-                std::cout << "The following route was found with " << nodeToExplore.getCost() << " of cost:\n" << nodeToExplore.getPath();
+            try {
+                if (exploreBreadthFirstSearchNode(nodeToExplore, frontier, exploredVertices, *destination, verbose)){
+                    std::cout << "The following route was found with " << nodeToExplore.getCost() << " of cost:\n" << nodeToExplore.getPath();
+                    return;
+                }
+            } catch (SearchNode<Vertex<City, Road>> e) {
+                std::cout << "The following route was found with " << e.getCost() << " of cost:\n" << e.getPath();
                 return;
             }
         }
@@ -212,7 +217,6 @@ public:
     }
     
     static void depthFirstSearch(Vertex<City, Road> * origin, Vertex<City, Road> * destination, bool verbose){
-        
         SearchNode<Vertex<City, Road>> originNode(origin);
         std::vector<SearchNode<Vertex<City, Road>>> solutions;
         std::vector<Vertex<City, Road> *> exploredVertices;
@@ -223,7 +227,12 @@ public:
             if (verbose) std::cout << "Discovering " << *nodeToExplore.getState()->getInfo() << std::endl;
             exploredVertices.push_back(nodeToExplore.getState());
             frontier.pop();
-            if (exploreDepthFirstSearchNode(nodeToExplore, frontier, exploredVertices, *destination, verbose)) solutions.push_back(nodeToExplore);
+            try {
+                if (exploreDepthFirstSearchNode(nodeToExplore, frontier, exploredVertices, *destination, verbose)) solutions.push_back(nodeToExplore);
+            } catch (SearchNode<Vertex<City, Road>> e) {
+                std::cout << "The following route was found with " << e.getCost() << " of cost:\n" << e.getPath();
+                return;
+            }
         }
         if (solutions.empty()) {
             std::cout << "No solution found..." << std::endl;
@@ -250,8 +259,13 @@ public:
             SearchNode<Vertex<City, Road>> nodeToExplore = heuristicFunction(frontier, *destination);
             if (verbose) std::cout << "Discovering city " << *nodeToExplore.getState()->getInfo() << std::endl;
             exploredVertices.push_back(nodeToExplore.getState());
-            if (exploreHeuristicSearchNode(nodeToExplore, frontier, exploredVertices, *destination, verbose)){
-                std::cout << "The following route was found with " << nodeToExplore.getCost() << " of cost:\n" << nodeToExplore.getPath();
+            try {
+                if (exploreHeuristicSearchNode(nodeToExplore, frontier, exploredVertices, *destination, verbose)){
+                    std::cout << "The following route was found with " << nodeToExplore.getCost() << " of cost:\n" << nodeToExplore.getPath();
+                    return;
+                }
+            } catch (SearchNode<Vertex<City, Road>> e) {
+                std::cout << "The following route was found with " << e.getCost() << " of cost:\n" << e.getPath();
                 return;
             }
         }

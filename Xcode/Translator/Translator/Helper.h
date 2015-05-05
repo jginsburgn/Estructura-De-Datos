@@ -18,6 +18,36 @@
 class Helper {
 public:
     
+    static long double stringToLongDouble(std::string value){
+        long double retVal =  0;
+        try {
+            retVal = std::stold(value);
+        } catch (const std::out_of_range& invalido) {
+            std::string description = "Number out of possible range...(";
+            description.append(value);
+            description.append(")");
+            throw description.c_str();
+        } catch (const std::invalid_argument& ia) {
+            std::string description = "Argument is not a number...(";
+            description.append(value);
+            description.append(")");
+            throw description.c_str();
+        }
+        return retVal;
+    }
+    
+    static bool stringStartsWithSequence(std::string str, std::string seq){
+        if (seq.length()>str.length()) return false;
+        const char * cstr = str.c_str();
+        const char * cseq = seq.c_str();
+        for (int i = 0; i < seq.size(); ++i) {
+            if (cstr[i] != cseq[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     static float stringToFloat(std::string value){
         float path =  0;
         try {
@@ -42,7 +72,6 @@ public:
         while (it != s.end() && std::isdigit(*it)) ++it;
         return !s.empty() && it == s.end();
     }
-    
     static std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
         std::stringstream ss(s);
         std::string item;

@@ -15,6 +15,24 @@
 
 class FileManager{
 public:
+    
+    static std::string readFile(std::string fileName){
+        std::string returner = "";
+        std::string line;
+        std::fstream document;
+        document.open(fileName, std::fstream::in | std::fstream::out | std::fstream::app);
+        document.seekg(0);
+        if (document.is_open())
+        {
+            while ( getline (document,line) )
+            {
+                returner.append(line);
+            }
+            document.close();
+        }
+        return returner;
+    }
+    
     static std::vector<std::string> loadFile(std::string fileName) {
         std::vector<std::string> returner;
         std::string line;
