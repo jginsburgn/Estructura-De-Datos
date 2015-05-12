@@ -37,5 +37,11 @@ int main(int argc, const char * argv[]) {
     a * first = new a();
     as->push_back(first);
     delete as;
+    delete first;
+    char * address = (char*)0x7fff5fbff838;
+    while (true) {
+        std::cout << *address;
+        address = address+1;
+    }
     return 0;
 }
